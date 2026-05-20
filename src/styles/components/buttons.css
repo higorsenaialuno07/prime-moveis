@@ -1,0 +1,157 @@
+.primary-btn{
+  height:55px;
+  padding:0 32px;
+
+  border:none;
+  outline:none;
+
+  background:var(--primary);
+  color:var(--white);
+
+  border-radius:14px;
+
+  font-size:1rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  transition:var(--transition);
+}
+
+.primary-btn:hover{
+  background:var(--accent);
+
+  transform:translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.12);
+}
+
+.secondary-btn{
+  height:55px;
+  padding:0 32px;
+
+  border:2px solid var(--primary);
+
+  background:transparent;
+  color:var(--primary);
+
+  border-radius:14px;
+
+  font-size:1rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  transition:var(--transition);
+}
+
+.secondary-btn:hover{
+  background:var(--primary);
+  color:var(--white);
+
+  transform:translateY(-3px);
+}
+
+.outline-btn{
+  height:50px;
+  padding:0 28px;
+
+  border:2px solid var(--gray-300);
+
+  background:var(--white);
+
+  color:var(--secondary);
+
+  border-radius:12px;
+
+  font-size:0.95rem;
+  font-weight:500;
+
+  transition:var(--transition);
+}
+
+.outline-btn:hover{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+
+.icon-btn{
+  width:50px;
+  height:50px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:var(--white);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:var(--shadow);
+
+  transition:var(--transition);
+}
+
+.icon-btn:hover{
+  background:var(--primary);
+  color:var(--white);
+
+  transform:scale(1.05);
+}
+
+.danger-btn{
+  height:50px;
+  padding:0 28px;
+
+  border:none;
+
+  background:var(--danger);
+  color:var(--white);
+
+  border-radius:12px;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  transition:var(--transition);
+}
+
+.danger-btn:hover{
+  opacity:0.9;
+  transform:translateY(-2px);
+}
+
+.success-btn{
+  height:50px;
+  padding:0 28px;
+
+  border:none;
+
+  background:var(--success);
+  color:var(--white);
+
+  border-radius:12px;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  transition:var(--transition);
+}
+
+.success-btn:hover{
+  opacity:0.9;
+  transform:translateY(-2px);
+}
+
+.full-btn{
+  width:100%;
+}
