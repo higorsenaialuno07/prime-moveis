@@ -5,13 +5,15 @@ import heroImage from '../assets/images/Cama.jpeg'
 import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
 import tableImage from '../assets/images/table.jpeg'
 
-console.log(sofaLuxury)
-
 function Home() {
+
   return (
+
     <div className="home-page">
 
       <Navbar />
+
+      {/* HERO */}
 
       <section className="hero">
 
@@ -46,18 +48,24 @@ function Home() {
         </div>
 
         <div className="hero-image">
+
           <img
             src={heroImage}
             alt="Móveis"
           />
+
         </div>
 
       </section>
 
+      {/* CATEGORIES */}
+
       <section className="categories">
 
         <div className="section-title">
-          <h2>Categorias</h2>
+          <h2>
+            Categorias
+          </h2>
         </div>
 
         <div className="categories-grid">
@@ -82,30 +90,36 @@ function Home() {
 
       </section>
 
+      {/* PRODUCTS */}
+
       <section className="featured-products">
 
         <div className="section-title">
-          <h2>Produtos em Destaque</h2>
+          <h2>
+            Produtos em Destaque
+          </h2>
         </div>
 
         <div className="products-grid">
 
+          {/* PRODUCT 1 */}
+
           <div className="product-card">
 
             <div className="product-image">
-<img
-  src={sofaLuxury}
-  alt="Sofá Luxury"
-  style={{
-    width:'300px',
-    border:'5px solid red'
-  }}
-/>
-</div>
+
+              <img
+                src={sofaLuxury}
+                alt="Sofá Luxury"
+              />
+
+            </div>
 
             <div className="product-content">
 
-              <h3>Sofá Luxury</h3>
+              <h3>
+                Sofá Luxury
+              </h3>
 
               <p className="product-description">
                 Design sofisticado para ambientes premium.
@@ -114,9 +128,11 @@ function Home() {
               <div className="product-footer">
 
                 <div className="product-price">
+
                   <span className="current-price">
                     R$ 2.499
                   </span>
+
                 </div>
 
                 <button className="product-btn">
@@ -129,18 +145,24 @@ function Home() {
 
           </div>
 
-         <div className="product-card">
+          {/* PRODUCT 2 */}
 
-  <div className="product-image">
-    <img
-      src={tableImage}
-      alt="Mesa Elegance"
-    />
-  </div>
+          <div className="product-card">
 
-  <div className="product-content">
+            <div className="product-image">
 
-    <h3>Mesa Elegance</h3>
+              <img
+                src={tableImage}
+                alt="Mesa Elegance"
+              />
+
+            </div>
+
+            <div className="product-content">
+
+              <h3>
+                Mesa Elegance
+              </h3>
 
               <p className="product-description">
                 Perfeita para salas modernas.
@@ -149,9 +171,11 @@ function Home() {
               <div className="product-footer">
 
                 <div className="product-price">
+
                   <span className="current-price">
                     R$ 1.799
                   </span>
+
                 </div>
 
                 <button className="product-btn">
@@ -164,18 +188,24 @@ function Home() {
 
           </div>
 
+          {/* PRODUCT 3 */}
+
           <div className="product-card">
 
             <div className="product-image">
+
               <img
                 src="https://images.unsplash.com/photo-1484101403633-562f891dc89a"
-                alt=""
+                alt="Cadeira Premium"
               />
+
             </div>
 
             <div className="product-content">
 
-              <h3>Cadeira Premium</h3>
+              <h3>
+                Cadeira Premium
+              </h3>
 
               <p className="product-description">
                 Conforto e elegância no mesmo produto.
@@ -184,9 +214,11 @@ function Home() {
               <div className="product-footer">
 
                 <div className="product-price">
+
                   <span className="current-price">
                     R$ 899
                   </span>
+
                 </div>
 
                 <button className="product-btn">
@@ -206,6 +238,7 @@ function Home() {
       <Footer />
 
     </div>
+
   )
 }
 

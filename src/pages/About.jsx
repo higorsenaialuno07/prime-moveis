@@ -1,6 +1,8 @@
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
+import empresaImage from '../assets/images/empresa.png'
+
 function About() {
   return (
     <div className="about-page">
@@ -25,12 +27,10 @@ function About() {
       </section>
 
       <section className="about-section">
-        <div className="about-image">
-          <img
-            src="https://images.unsplash.com/photo-1494526585095-c41746248156"
-            alt="Empresa"
-          />
-        </div>
+       <img
+  src={empresaImage}
+  alt="Empresa"
+/>
 
         <div className="about-content">
           <h2>Nossa História</h2>
