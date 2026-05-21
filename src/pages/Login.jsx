@@ -3,50 +3,178 @@ import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 
 function Login() {
-  const { signIn } = useAuth()
+
+  const {
+    signIn,
+    signUp,
+  } = useAuth()
 
   const navigate = useNavigate()
+
+  const [isRegister, setIsRegister] = useState(false)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  async function handleLogin(e) {
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e) {
+
     e.preventDefault()
 
-    const { error } = await signIn(email, password)
+    setLoading(true)
 
-    if (error) {
-      alert(error.message)
-      return
+    try {
+
+      if (isRegister) {
+
+        const { error } = await signUp(
+          email,
+          password
+        )
+
+        if (error) {
+          alert(error.message)
+          return
+        }
+
+        alert('Conta criada com sucesso!')
+
+      } else {
+
+        const { error } = await signIn(
+          email,
+          password
+        )
+
+        if (error) {
+          alert(error.message)
+          return
+        }
+
+        navigate('/dashboard')
+
+      }
+
+    } catch (err) {
+
+      alert('Erro inesperado.')
+
+    } finally {
+
+      setLoading(false)
+
     }
 
-    navigate('/dashboard')
   }
 
   return (
-    <div className="auth-page">
-      <form className="auth-form" onSubmit={handleLogin}>
-        <h1>Entrar</h1>
 
-        <input
-          type="email"
-          placeholder="Digite seu email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <section className="auth-page">
 
-        <input
-          type="password"
-          placeholder="Digite sua senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <div className="auth-overlay"></div>
 
-        <button type="submit">
-          Entrar
-        </button>
-      </form>
-    </div>
+      <div className="auth-container">
+
+        <div className="auth-left">
+
+          <span className="auth-badge">
+            Prime Móveis
+          </span>
+
+          <h1>
+            {isRegister
+              ? 'Crie sua conta'
+              : 'Bem-vindo novamente'}
+          </h1>
+
+          <p>
+            Acesse a plataforma premium
+            da Prime Móveis e descubra
+            móveis modernos e sofisticados.
+          </p>
+
+        </div>
+
+        <div className="auth-right">
+
+          <form
+            className="auth-form"
+            onSubmit={handleSubmit}
+          >
+
+            <h2>
+              {isRegister
+                ? 'Criar Conta'
+                : 'Entrar'}
+            </h2>
+
+            <div className="input-group">
+
+              <label>Email</label>
+
+              <input
+                type="email"
+                placeholder="Digite seu email"
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+                required
+              />
+
+            </div>
+
+            <div className="input-group">
+
+              <label>Senha</label>
+
+              <input
+                type="password"
+                placeholder="Digite sua senha"
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+                required
+              />
+
+            </div>
+
+            <button
+              type="submit"
+              className="auth-btn"
+            >
+
+              {loading
+                ? 'Carregando...'
+                : isRegister
+                  ? 'Cadastrar'
+                  : 'Entrar'}
+
+            </button>
+
+            <span
+              className="switch-auth"
+              onClick={() =>
+                setIsRegister(!isRegister)
+              }
+            >
+
+              {isRegister
+                ? 'Já possui conta? Entrar'
+                : 'Não possui conta? Criar conta'}
+
+            </span>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </section>
+
   )
 }
 

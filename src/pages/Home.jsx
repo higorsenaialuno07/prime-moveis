@@ -2,6 +2,10 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
 import heroImage from '../assets/images/Cama.jpeg'
+import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
+import tableImage from '../assets/images/table.jpeg'
+
+console.log(sofaLuxury)
 
 function Home() {
   return (
@@ -89,15 +93,19 @@ function Home() {
           <div className="product-card">
 
             <div className="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc"
-                alt=""
-              />
-            </div>
+<img
+  src={sofaLuxury}
+  alt="Sofá Luxury"
+  style={{
+    width:'300px',
+    border:'5px solid red'
+  }}
+/>
+</div>
 
             <div className="product-content">
 
-              <h3>Sofá Moderno</h3>
+              <h3>Sofá Luxury</h3>
 
               <p className="product-description">
                 Design sofisticado para ambientes premium.
@@ -121,18 +129,18 @@ function Home() {
 
           </div>
 
-          <div className="product-card">
+         <div className="product-card">
 
-            <div className="product-image">
-              <img
-                src="https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e"
-                alt=""
-              />
-            </div>
+  <div className="product-image">
+    <img
+      src={tableImage}
+      alt="Mesa Elegance"
+    />
+  </div>
 
-            <div className="product-content">
+  <div className="product-content">
 
-              <h3>Mesa Elegance</h3>
+    <h3>Mesa Elegance</h3>
 
               <p className="product-description">
                 Perfeita para salas modernas.

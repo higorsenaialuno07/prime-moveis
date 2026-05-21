@@ -8,7 +8,7 @@ function FeaturedProducts() {
       description: 'Conforto premium',
       price: '3.999',
       image:
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc',
+        '../assets/images/sofa-luxury.jpeg',
     },
 
     {
@@ -17,7 +17,7 @@ function FeaturedProducts() {
       description: 'Mesa moderna elegante',
       price: '2.199',
       image:
-        'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e',
+        '../assets/images/mesa-gold.jpeg',
     },
 
     {
@@ -26,7 +26,7 @@ function FeaturedProducts() {
       description: 'Design sofisticado',
       price: '1.299',
       image:
-        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85',
+        '../assets/images/poltrona-classic.jpeg',
     },
   ]
 

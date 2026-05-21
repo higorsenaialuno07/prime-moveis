@@ -8,7 +8,8 @@
 
   padding:0 7%;
 
-  background:rgba(255,255,255,0.95);
+  background:
+    rgba(255,255,255,0.95);
 
   backdrop-filter:blur(12px);
 
@@ -21,6 +22,31 @@
     0 2px 20px rgba(0,0,0,0.05);
 }
 
+/* TABLET */
+
+@media(max-width:900px){
+
+  .navbar{
+    padding:0 5%;
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .navbar{
+    height:auto;
+
+    padding:20px 5%;
+
+    flex-direction:column;
+
+    gap:20px;
+  }
+
+}
 /* LOGO */
 
 .logo{
@@ -139,15 +165,65 @@
 }
 
 .login-btn{
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b
+    );
+
+  color:white;
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,0.18);
+}
+
+.login-btn:hover{
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(15,23,42,0.28);
+}
+.login-btn:active{
+  transform:scale(0.97);
+}
+
+
+.cart-btn{
+  background:white;
+
+  color:#0f172a;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.08);
+}
+
+.cart-btn:hover{
+  transform:
+    translateY(-3px);
+
+  background:#f8fafc;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.12);
+}
+
+
+
+
+
+
+
+.login-btn,
+.cart-btn{
   height:50px;
+
   padding:0 28px;
 
   border:none;
 
   border-radius:14px;
-
-  background:var(--primary);
-  color:var(--white);
 
   font-size:0.95rem;
   font-weight:600;
@@ -157,65 +233,17 @@
   justify-content:center;
   gap:10px;
 
-  transition:0.3s;
+  cursor:pointer;
 
-  box-shadow:
-    0 8px 20px rgba(15,23,42,0.15);
-}
-
-.login-btn:hover{
-  background:var(--accent);
-
-  transform:translateY(-3px);
-
-  box-shadow:
-    0 12px 25px rgba(0,0,0,0.18);
-}
-
-.login-btn:active{
-  transform:scale(0.97);
-}   
-
-
-.cart-btn{
-  position:relative;
-
-  width:99px;
-  height:46px;
-
-  border:none;
-
-  border-radius:14px;
-
-  background: var(--primary);
-  color:var(--white);
-
-  font-size: 0.95rem;
-  font-weight: 600;
-
-
-  display:flex;
-  gap: 10px;
-  align-items:center;
-  justify-content:center;
-
-  transition:0.3s;
-
- box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s,
+    background 0.3s;
 }
 
 
 
-.cart-btn:hover{
-  background:var(--primary);
-  color:var(--white);
 
-  transform:translateY(-3px);
-}
-
-.cart-btn:active{
-  transform:scale(0.96);
-}
 
 /* QUANTIDADE */
 

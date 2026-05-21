@@ -12,7 +12,7 @@ function Products() {
         'Sofá moderno com acabamento premium.',
       price: 3999,
       image:
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc',
+        '../assets/images/sofa-luxury.jpeg',
       category: 'Sofás',
     },
 
@@ -23,7 +23,7 @@ function Products() {
         'Mesa sofisticada para ambientes modernos.',
       price: 1899,
       image:
-        'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e',
+        '../assets/images/mesa-gold.jpeg',
       category: 'Mesas',
     },
 
@@ -34,7 +34,7 @@ function Products() {
         'Conforto e design contemporâneo.',
       price: 1299,
       image:
-        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85',
+        '../assets/images/poltrona-classic.jpeg',
       category: 'Poltronas',
     },
 
@@ -45,7 +45,7 @@ function Products() {
         'Ideal para salas sofisticadas.',
       price: 799,
       image:
-        'https://images.unsplash.com/photo-1519947486511-46149fa0a254',
+        '../assets/images/cadeira-premium.jpeg',
       category: 'Cadeiras',
     },
 
@@ -56,7 +56,7 @@ function Products() {
         'Rack elegante para sua sala.',
       price: 1499,
       image:
-        'https://images.unsplash.com/photo-1484101403633-562f891dc89a',
+        '../assets/images/rack-modern.jpeg',
       category: 'Racks',
     },
 
@@ -67,7 +67,7 @@ function Products() {
         'Perfeita para home office moderno.',
       price: 2199,
       image:
-        'https://images.unsplash.com/photo-1497366754035-f200968a6e72',
+        '../assets/images/mesa-office.jpeg',
       category: 'Escritório',
     },
   ]

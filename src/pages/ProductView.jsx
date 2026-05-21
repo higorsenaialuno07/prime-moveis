@@ -17,7 +17,7 @@ function ProductView() {
     rating: 4.9,
     reviews: 128,
     image:
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc',
+      '../assets/images/sofa-luxury.jpeg',
     description:
       'Sofá sofisticado com acabamento premium, espuma de alta densidade e design contemporâneo para ambientes modernos.',
   }

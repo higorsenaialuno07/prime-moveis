@@ -10,7 +10,7 @@ function Cart() {
       price: 3999,
       quantity: 1,
       image:
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc',
+        '../assets/images/sofa-luxury.jpeg',
     },
 
     {
@@ -19,7 +19,7 @@ function Cart() {
       price: 1899,
       quantity: 2,
       image:
-        'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e',
+        '../assets/images/mesa-gold.jpeg',
     },
   ]
 
