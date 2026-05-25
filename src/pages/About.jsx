@@ -119,7 +119,7 @@ function About() {
               alt=""
             />
 
-            <h3>Ana Costa</h3>
+            <h3>Gabriel Santos</h3>
 
             <span>Designer</span>
           </div>

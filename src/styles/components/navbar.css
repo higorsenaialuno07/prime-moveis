@@ -165,40 +165,75 @@
 }
 
 .login-btn{
-  background:
-    linear-gradient(
-      135deg,
-      #0f172a,
-      #1e293b
-    );
+  min-width:120px;
+  height:48px;
 
-  color:white;
+  padding:0 28px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#0f172a;
+  color:#fff;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.3s;
 
   box-shadow:
-    0 10px 25px rgba(15,23,42,0.18);
+    0 8px 20px rgba(15,23,42,0.12);
 }
 
 .login-btn:hover{
-  transform:
-    translateY(-3px);
+  transform:translateY(-2px);
 
-  box-shadow:
-    0 15px 35px rgba(15,23,42,0.28);
+  background:#1e293b;
 }
+
 .login-btn:active{
   transform:scale(0.97);
 }
 
 
-.cart-btn{
-  background:white;
-
-  color:#0f172a;
-
-  box-shadow:
-    0 10px 25px rgba(0,0,0,0.08);
+.navbar-actions{
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
+.cart-btn{
+  min-width:120px;
+  height:48px;
+
+  padding:0 28px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#ffffff;
+  color:#0f172a;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.08);
+}
 .cart-btn:hover{
   transform:
     translateY(-3px);

@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react'
+
 import { useAuth } from '../context/AuthContext'
+import { supabase } from '../services/supabase'
+import { Link } from 'react-router-dom'
 
 function Dashboard() {
 
@@ -6,6 +10,26 @@ function Dashboard() {
     user,
     signOut,
   } = useAuth()
+
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    loadOrders()
+  }, [])
+
+  async function loadOrders() {
+
+    const { data, error } = await supabase
+      .from('orders')
+      .select('*')
+
+    if(error){
+      console.log(error)
+      return
+    }
+
+    setOrders(data)
+  }
 
   async function handleLogout() {
     await signOut()
@@ -27,29 +51,29 @@ function Dashboard() {
 
           <nav className="sidebar-nav">
 
-            <a href="#">
+            <Link to="/dashboard">
               Dashboard
-            </a>
+            </Link>
 
-            <a href="#">
+            <Link to="/products">
               Produtos
-            </a>
+            </Link>
 
-            <a href="#">
+            <Link to="/orders">
               Pedidos
-            </a>
+            </Link>
 
-            <a href="#">
+            <Link to="/clients">
               Clientes
-            </a>
+            </Link>
 
-            <a href="#">
+            <Link to="/reports">
               Relatórios
-            </a>
+            </Link>
 
-            <a href="#">
+            <Link to="/settings">
               Configurações
-            </a>
+            </Link>
 
           </nav>
 
@@ -106,8 +130,8 @@ function Dashboard() {
 
           <div className="stat-card">
             <span>Pedidos</span>
-            <h2>120</h2>
-            <p>+8 novos pedidos</p>
+            <h2>{orders.length}</h2>
+            <p>Pedidos realizados</p>
           </div>
 
           <div className="stat-card">
@@ -151,38 +175,33 @@ function Dashboard() {
 
             <tbody>
 
-              <tr>
-                <td>Lucas Silva</td>
-                <td>Sofá Moderno</td>
-                <td>R$ 2.499</td>
-                <td>
-                  <span className="status delivered">
-                    Entregue
-                  </span>
-                </td>
-              </tr>
+              {orders.map((order) => (
 
-              <tr>
-                <td>Maria Souza</td>
-                <td>Mesa Elegance</td>
-                <td>R$ 1.799</td>
-                <td>
-                  <span className="status pending">
-                    Pendente
-                  </span>
-                </td>
-              </tr>
+                <tr key={order.id}>
 
-              <tr>
-                <td>Pedro Lima</td>
-                <td>Cadeira Premium</td>
-                <td>R$ 899</td>
-                <td>
-                  <span className="status delivered">
-                    Entregue
-                  </span>
-                </td>
-              </tr>
+                  <td>
+                    {order.user_id}
+                  </td>
+
+                  <td>
+                    Pedido Finalizado
+                  </td>
+
+                  <td>
+                    R$ {order.total}
+                  </td>
+
+                  <td>
+
+                    <span className="status delivered">
+                      Pago
+                    </span>
+
+                  </td>
+
+                </tr>
+
+              ))}
 
             </tbody>
 

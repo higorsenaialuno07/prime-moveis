@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer'
 import heroImage from '../assets/images/Cama.jpeg'
 import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
 import tableImage from '../assets/images/table.jpeg'
+import chairImage from '../assets/images/cadeira-premium.jpeg'
 
 function Home() {
 
@@ -104,7 +105,7 @@ function Home() {
 
           {/* PRODUCT 1 */}
 
-          <div className="product-card">
+          <div className="product-card-sofa">
 
             <div className="product-image">
 
@@ -130,7 +131,7 @@ function Home() {
                 <div className="product-price">
 
                   <span className="current-price">
-                    R$ 2.499
+                    R$  2599.98
                   </span>
 
                 </div>
@@ -173,7 +174,7 @@ function Home() {
                 <div className="product-price">
 
                   <span className="current-price">
-                    R$ 1.799
+                    R$ 771.86
                   </span>
 
                 </div>
@@ -195,7 +196,7 @@ function Home() {
             <div className="product-image">
 
               <img
-                src="https://images.unsplash.com/photo-1484101403633-562f891dc89a"
+                src={chairImage}
                 alt="Cadeira Premium"
               />
 
@@ -216,7 +217,7 @@ function Home() {
                 <div className="product-price">
 
                   <span className="current-price">
-                    R$ 899
+                    R$ 1900
                   </span>
 
                 </div>
