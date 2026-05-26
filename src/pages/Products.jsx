@@ -1,126 +1,143 @@
-import Navbar from '../components/layout/Navbar'
-import Footer from '../components/layout/Footer'
-import ProductFilter from '../components/products/ProductFilter'
-import ProductCard from '../components/products/ProductCard'
+  import { useState } from 'react'
+  import { Link } from 'react-router-dom'
 
-import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
-import tableImage from '../assets/images/table.jpeg'
-import chairImage from '../assets/images/cadeira-premium.jpeg'
-import poltronaImage from '../assets/images/poltrona-classic.jpeg'
-import rackImage from '../assets/images/rack.jpeg'
-import officeImage from '../assets/images/mesa-office.jpeg'
+  import Navbar from '../components/layout/Navbar'
+  import Footer from '../components/layout/Footer'
+  import ProductFilter from '../components/products/ProductFilter'
+  import ProductCard from '../components/products/ProductCard'
 
+  import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
+  import tableImage from '../assets/images/table.jpeg'
+  import chairImage from '../assets/images/cadeira-premium.jpeg'
+  import poltronaImage from '../assets/images/poltrona-classic.jpeg'
+  import rackImage from '../assets/images/rack.jpeg'
+  import officeImage from '../assets/images/mesa-office.jpeg'
 
+  function Products() {
 
-function Products() {
-  const products = [
-  {
-    id: 1,
-    name: 'Sofá Luxury',
-    description:
-      'Sofá moderno com acabamento premium.',
-    price: 2599.98,
-    image: sofaLuxury,
-    category: 'Sofás',
-  },
+    const [search, setSearch] = useState('')
+    const [category, setCategory] = useState('all')
+    const [sort, setSort] = useState('low')
 
-  {
-    id: 2,
-    name: 'Mesa Elegance',
-    description:
-      'Mesa sofisticada para ambientes modernos.',
-    price: 771.86,
-    image: tableImage,
-    category: 'Mesas',
-  },
+    const products = [
+      {
+        id: 1,
+        name: 'Sofá Luxury',
+        description: 'Sofá moderno com acabamento premium.',
+        price: 2599.98,
+        image: sofaLuxury,
+        category: 'sofas',
+      },
+      {
+        id: 2,
+        name: 'Mesa Elegance',
+        description: 'Mesa sofisticada para ambientes modernos.',
+        price: 771.86,
+        image: tableImage,
+        category: 'mesas',
+      },
+      {
+        id: 3,
+        name: 'Poltrona Classic',
+        description: 'Conforto e design contemporâneo.',
+        price: 940.71,
+        image: poltronaImage,
+        category: 'poltronas',
+      },
+      {
+        id: 4,
+        name: 'Cadeira Premium',
+        description: 'Ideal para salas sofisticadas.',
+        price: 1900,
+        image: chairImage,
+        category: 'cadeiras',
+      },
+      {
+        id: 5,
+        name: 'Rack Modern',
+        description: 'Rack elegante para sua sala.',
+        price: 865.72,
+        image: rackImage,
+        category: 'racks',
+      },
+      {
+        id: 6,
+        name: 'Mesa Office',
+        description: 'Perfeita para home office moderno.',
+        price: 572.55,
+        image: officeImage,
+        category: 'escritorio',
+      },
+    ]
 
-  {
-    id: 3,
-    name: 'Poltrona Classic',
-    description:
-      'Conforto e design contemporâneo.',
-    price:  940.71,
-    image: poltronaImage,
-    category: 'Poltronas',
-  },
+    const filteredProducts = products
+      .filter((product) => {
+        const matchSearch = product.name
+          .toLowerCase()
+          .includes(search.toLowerCase())
 
-  {
-    id: 4,
-    name: 'Cadeira Premium',
-    description:
-      'Ideal para salas sofisticadas.',
-    price: 1900,
-    image: chairImage,
-    category: 'Cadeiras',
-  },
+        const matchCategory =
+          category === 'all' ||
+          product.category === category
 
-  {
-    id: 5,
-    name: 'Rack Modern',
-    description:
-      'Rack elegante para sua sala.',
-    price: 865.72,
-    image: rackImage,
-    category: 'Racks',
-  },
+        return matchSearch && matchCategory
+      })
+      .sort((a, b) => {
+        if (sort === 'low') return a.price - b.price
+        if (sort === 'high') return b.price - a.price
+        return 0
+      })
 
-  {
-    id: 6,
-    name: 'Mesa Office',
-    description:
-      'Perfeita para home office moderno.',
-    price: 572.55,
-    image: officeImage,
-    category: 'Escritório',
-  },
-]
+    return (
+      <div className="products-page">
 
-  return (
-    <div className="products-page">
-      <Navbar />
+        <Navbar />
 
-      <section className="products-hero">
-        <div className="products-hero-content">
-          <span className="products-badge">
-            Catálogo Premium
-          </span>
+        <section className="products-hero">
+          <div className="products-hero-content">
+            <span className="products-badge">Catálogo Premium</span>
 
-          <h1>
-            Explore nossa coleção de móveis
-          </h1>
+            <h1>Explore nossa coleção de móveis</h1>
 
-          <p>
-            Produtos modernos, sofisticados e
-            desenvolvidos para transformar
-            ambientes.
-          </p>
-        </div>
-      </section>
+            <p>
+              Produtos modernos, sofisticados e desenvolvidos para transformar ambientes.
+            </p>
 
-      <section className="products-section">
-        <div className="products-top">
-          <h2>Todos os Produtos</h2>
+            <Link to="/dashboard" className="dashboard-btn">
+              Ir para Dashboard
+            </Link>
+          </div>
+        </section>
 
-          <p>
-            {products.length} produtos encontrados
-          </p>
-        </div>
+        <section className="products-section">
 
-        <ProductFilter />
+          <div className="products-top">
+            <h2>Todos os Produtos</h2>
+            <p>{filteredProducts.length} produtos encontrados</p>
+          </div>
 
-        <div className="products-grid">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-            />
-          ))}
-        </div>
-      </section>
+          {/* FILTRO COMPLETO */}
+          <ProductFilter
+            search={search}
+            setSearch={setSearch}
+            category={category}
+            setCategory={setCategory}
+            sort={sort}
+            setSort={setSort}
+          />
 
-      <Footer />
-    </div>
-  )
-}
+          <div className="products-grid">
+            {filteredProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
 
-export default Products
+        </section>
+
+        <Footer />
+
+      </div>
+    )
+  }
+
+  export default Products

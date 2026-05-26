@@ -1,0 +1,9 @@
+.status.ativo {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.status.pendente {
+  background: #fff7ed;
+  color: #c2410c;
+}

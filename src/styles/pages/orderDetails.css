@@ -1,0 +1,31 @@
+.order-details-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.order-details-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.order-details-card strong {
+  color: #0f172a;
+}
+
+.btn-secondary {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: #e2e8f0;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background: #cbd5e1;
+}

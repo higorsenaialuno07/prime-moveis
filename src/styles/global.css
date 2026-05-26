@@ -71,3 +71,150 @@ select{
   max-width:1400px;
   margin:auto;
 }
+
+body.dark {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+
+body.dark .dashboard-page {
+  background: #0b1220;
+}
+
+body.dark .sidebar {
+  background: #020617;
+}
+
+body.dark .dashboard-main {
+  background: #0b1220;
+}
+
+body.dark .stat-card,
+body.dark .dashboard-table {
+  background: #111827;
+  color: #f8fafc;
+}
+
+body.dark input,
+body.dark select {
+  background: #1f2937;
+  color: #f8fafc;
+  border: 1px solid #334155;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #22c55e;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+.reset-btn {
+  margin-top: 20px;
+  padding: 10px 16px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background: #dc2626;
+}
+
+body.dark {
+  background: #0f172a;
+  color: #f1f5f9;
+}
+
+/* garante que textos não fiquem escuros */
+body.dark p,
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark span,
+body.dark td,
+body.dark th,
+body.dark a {
+  color: #f8fafc;
+}
+
+
+body.dark .sidebar {
+  background: #020617;
+}
+body.dark .dashboard-main {
+  background: #0b1220;
+}
+
+body.dark .stat-card,
+body.dark .dashboard-table {
+  background: #111827;
+  color: #f1f5f9;
+}
+
+:root {
+  --text: #111;
+  --bg: #fff;
+}
+
+body.dark {
+  --text: #f1f5f9;
+  --bg: #0f172a;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+body {
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.sidebar,
+.dashboard-main,
+.stat-card,
+.dashboard-table {
+  transition: background 0.3s ease, color 0.3s ease;
+}

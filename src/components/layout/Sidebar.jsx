@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import {
   LayoutDashboard,
   Sofa,
   ShoppingCart,
   Users,
   BarChart3,
-} from 'lucide-react'
+} from "lucide-react";
 
 function Sidebar() {
   return (
@@ -14,33 +15,35 @@ function Sidebar() {
       </div>
 
       <nav className="sidebar-menu">
-        <a href="#">
+
+        <Link to="/dashboard">
           <LayoutDashboard size={20} />
           Dashboard
-        </a>
+        </Link>
 
-        <a href="#">
+        <Link to="/products">
           <Sofa size={20} />
           Produtos
-        </a>
+        </Link>
 
-        <a href="#">
+        <Link to="/orders">
           <ShoppingCart size={20} />
           Pedidos
-        </a>
+        </Link>
 
-        <a href="#">
+        <Link to="/clients">
           <Users size={20} />
           Clientes
-        </a>
+        </Link>
 
-        <a href="#">
+        <Link to="/reports">
           <BarChart3 size={20} />
           Relatórios
-        </a>
+        </Link>
+
       </nav>
     </aside>
-  )
+  );
 }
 
-export default Sidebar
+export default Sidebar;

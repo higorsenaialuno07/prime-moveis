@@ -381,3 +381,100 @@
   }
 
 }
+
+
+/* DASHBOARD BUTTON */
+
+.dashboard-btn{
+  min-width:140px;
+  height:50px;
+
+  padding:0 28px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#0ea5e9;
+  color:#fff;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  box-shadow:
+    0 8px 20px rgba(14,165,233,0.18);
+}
+
+.dashboard-btn:hover{
+  transform:translateY(-3px);
+
+  background:#0284c7;
+
+  box-shadow:
+    0 15px 35px rgba(14,165,233,0.25);
+}
+
+.dashboard-btn:active{
+  transform:scale(0.97);
+}
+
+/* LOGOUT BUTTON */
+
+.logout-btn{
+  min-width:120px;
+  height:50px;
+
+  padding:0 28px;
+
+  border:none;
+  border-radius:14px;
+
+  background:#ef4444;
+  color:#fff;
+
+  font-size:0.95rem;
+  font-weight:600;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  cursor:pointer;
+
+  transition:0.3s;
+
+  box-shadow:
+    0 8px 20px rgba(239,68,68,0.18);
+}
+
+.logout-btn:hover{
+  transform:translateY(-3px);
+
+  background:#dc2626;
+
+  box-shadow:
+    0 15px 35px rgba(239,68,68,0.25);
+}
+
+.logout-btn:active{
+  transform:scale(0.97);
+}
+
+.navbar-actions a{
+  display:flex;
+  align-items:center;
+}
+
+.navbar-actions button{
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}

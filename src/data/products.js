@@ -4,7 +4,7 @@ const products = [
     name: 'Sofá Luxury',
     description:
       'Sofá moderno com acabamento premium.',
-    category: 'Sofás',
+    category: 'sofas',
     price: 3999,
     stock: 12,
     rating: 4.9,
@@ -17,7 +17,7 @@ const products = [
     name: 'Mesa Elegance',
     description:
       'Mesa sofisticada para ambientes modernos.',
-    category: 'Mesas',
+    category: 'mesas',
     price: 1899,
     stock: 8,
     rating: 4.8,
@@ -30,7 +30,7 @@ const products = [
     name: 'Poltrona Classic',
     description:
       'Conforto e design contemporâneo.',
-    category: 'Poltronas',
+    category: 'poltronas',
     price: 1299,
     stock: 15,
     rating: 4.7,
@@ -43,7 +43,7 @@ const products = [
     name: 'Cadeira Premium',
     description:
       'Ideal para salas sofisticadas.',
-    category: 'Cadeiras',
+    category: 'cadeiras',
     price: 799,
     stock: 20,
     rating: 4.6,
@@ -56,7 +56,7 @@ const products = [
     name: 'Rack Modern',
     description:
       'Rack elegante para sua sala.',
-    category: 'Racks',
+    category: 'racks',
     price: 1499,
     stock: 10,
     rating: 4.8,
@@ -69,7 +69,7 @@ const products = [
     name: 'Mesa Office',
     description:
       'Perfeita para home office moderno.',
-    category: 'Escritório',
+    category: 'escritorio',
     price: 2199,
     stock: 6,
     rating: 4.9,

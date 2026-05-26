@@ -664,12 +664,125 @@
 
 .product-filter{
   display:flex;
-
-  flex-wrap:wrap;
-
+  align-items:center;
   gap:18px;
 
-  margin:50px 0;
+  margin-bottom:35px;
+
+  flex-wrap:wrap;
+}
+
+/* SELECT */
+
+.custom-select{
+  min-width:220px;
+  height:52px;
+
+  padding:0 18px;
+
+  border:1px solid #dbe2ea;
+  border-radius:14px;
+
+  background:#ffffff;
+  color:#0f172a;
+
+  font-size:0.95rem;
+  font-weight:500;
+
+  outline:none;
+
+  cursor:pointer;
+
+  transition:
+    border 0.3s,
+    box-shadow 0.3s,
+    transform 0.2s;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.04);
+
+  appearance:none;
+  -webkit-appearance:none;
+  -moz-appearance:none;
+
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='%230f172a' viewBox='0 0 256 256'%3E%3Cpath d='M210.83 98.83a4 4 0 0 1 0 5.66l-80 80a4 4 0 0 1-5.66 0l-80-80a4 4 0 0 1 5.66-5.66L128 175.17l77.17-76.34a4 4 0 0 1 5.66 0Z'%3E%3C/path%3E%3C/svg%3E");
+
+  background-repeat:no-repeat;
+  background-position:right 16px center;
+  background-size:18px;
+}
+
+.custom-select:hover{
+  border-color:#94a3b8;
+
+  transform:translateY(-1px);
+}
+
+.custom-select:focus{
+  border-color:#0ea5e9;
+
+  box-shadow:
+    0 0 0 4px rgba(14,165,233,0.15);
+}
+
+/* INPUT */
+
+.search-input{
+  flex:1;
+  min-width:260px;
+  height:52px;
+
+  padding:0 18px;
+
+  border:1px solid #dbe2ea;
+  border-radius:14px;
+
+  background:#fff;
+  color:#0f172a;
+
+  font-size:0.95rem;
+  font-weight:500;
+
+  outline:none;
+
+  transition:
+    border 0.3s,
+    box-shadow 0.3s,
+    transform 0.2s;
+
+  box-shadow:
+    0 4px 12px rgba(0,0,0,0.04);
+}
+
+.search-input::placeholder{
+  color:#94a3b8;
+}
+
+.search-input:hover{
+  border-color:#94a3b8;
+}
+
+.search-input:focus{
+  border-color:#0ea5e9;
+
+  box-shadow:
+    0 0 0 4px rgba(14,165,233,0.15);
+}
+
+/* RESPONSIVO */
+
+@media(max-width:768px){
+
+  .product-filter{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .custom-select,
+  .search-input{
+    width:100%;
+  }
+
 }
 
 .product-filter button{
