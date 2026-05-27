@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
@@ -15,7 +17,6 @@ function Home() {
       <Navbar />
 
       {/* HERO */}
-
       <section className="hero">
 
         <div className="hero-content">
@@ -34,15 +35,22 @@ function Home() {
             contemporâneo.
           </p>
 
+          {/* BOTÕES FUNCIONANDO */}
           <div className="hero-buttons">
 
-            <button className="primary-btn">
+            <Link
+              to="/products"
+              className="primary-btn"
+            >
               Explorar Produtos
-            </button>
+            </Link>
 
-            <button className="secondary-btn">
-              Ver Catálogo
-            </button>
+            <Link
+  to="/catalogo"
+  className="secondary-btn"
+>
+  Ver Catálogo
+</Link>
 
           </div>
 
@@ -60,7 +68,6 @@ function Home() {
       </section>
 
       {/* CATEGORIES */}
-
       <section className="categories">
 
         <div className="section-title">
@@ -92,7 +99,6 @@ function Home() {
       </section>
 
       {/* PRODUCTS */}
-
       <section className="featured-products">
 
         <div className="section-title">
@@ -104,7 +110,6 @@ function Home() {
         <div className="products-grid">
 
           {/* PRODUCT 1 */}
-
           <div className="product-card-sofa">
 
             <div className="product-image">
@@ -131,7 +136,7 @@ function Home() {
                 <div className="product-price">
 
                   <span className="current-price">
-                    R$  2599.98
+                    R$ 2599.98
                   </span>
 
                 </div>
@@ -147,7 +152,6 @@ function Home() {
           </div>
 
           {/* PRODUCT 2 */}
-
           <div className="product-card">
 
             <div className="product-image">
@@ -190,7 +194,6 @@ function Home() {
           </div>
 
           {/* PRODUCT 3 */}
-
           <div className="product-card">
 
             <div className="product-image">

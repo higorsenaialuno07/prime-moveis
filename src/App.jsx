@@ -12,7 +12,7 @@ import Cart from "./pages/Cart";
 
 import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
-
+import Catalogo from "./pages/Catalogo";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -21,13 +21,14 @@ function App() {
   return (
     <Routes>
 
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
 
       <Route path="/login" element={<Login />} />
       <Route path="/cart" element={<Cart />} />
 
       {/* PRODUTOS */}
       <Route path="/products" element={<Products />} />
+      <Route path="/catalogo" element={<Catalogo />} />
       <Route path="/products/:id" element={<ProductView />} />
 
       <Route path="/dashboard" element={<Dashboard />} />

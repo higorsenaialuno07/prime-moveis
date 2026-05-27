@@ -222,9 +222,9 @@ table{
   border-collapse:collapse;
 }
 
-thead{
+/* thead{
   background:#f1f5f9;
-}
+} */
 
 th{
   padding:18px;

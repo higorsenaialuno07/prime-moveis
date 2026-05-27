@@ -60,9 +60,9 @@ table {
   border-collapse: collapse;
 }
 
-thead {
+/* thead {
   background: #f8fafc;
-}
+} */
 
 th {
   text-align: left;

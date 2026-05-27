@@ -5,116 +5,116 @@ import Footer from '../components/layout/Footer'
 
 import { Trash2, Plus, Minus } from 'lucide-react'
 
-import { supabase } from '../services/supabase'
-import { useAuth } from '../context/AuthContext'
-
 function Cart() {
-
-  const { user } = useAuth()
 
   const [cartItems, setCartItems] = useState([])
 
+  // CARREGAR CARRINHO
   useEffect(() => {
 
-    if(user){
-      loadCart()
-    }
+    const savedCart =
+      JSON.parse(localStorage.getItem('cart')) || []
 
-  }, [user])
+    const formattedCart = savedCart.map((item) => ({
+      ...item,
+      quantity: item.quantity || 1
+    }))
 
-  async function loadCart() {
+    setCartItems(formattedCart)
 
-    const { data, error } = await supabase
-      .from('cart_items')
-      .select('*')
-      .eq('user_id', user.id)
+  }, [])
 
-    if(error){
-      console.log(error)
-      return
-    }
+  // SALVAR CARRINHO
+  function updateCart(items) {
 
-    setCartItems(data)
+    setCartItems(items)
+
+    localStorage.setItem(
+      'cart',
+      JSON.stringify(items)
+    )
   }
 
-  async function removeItem(id) {
+  // REMOVER ITEM
+  function removeItem(id) {
 
-    await supabase
-      .from('cart_items')
-      .delete()
-      .eq('id', id)
+    const updatedCart =
+      cartItems.filter((item) => item.id !== id)
 
-    loadCart()
+    updateCart(updatedCart)
   }
 
-  async function increaseQuantity(item) {
+  // AUMENTAR QUANTIDADE
+  function increaseQuantity(id) {
 
-    await supabase
-      .from('cart_items')
-      .update({
-        quantity: item.quantity + 1
-      })
-      .eq('id', item.id)
+    const updatedCart = cartItems.map((item) => {
 
-    loadCart()
+      if(item.id === id){
+
+        return {
+          ...item,
+          quantity: item.quantity + 1
+        }
+      }
+
+      return item
+    })
+
+    updateCart(updatedCart)
   }
 
-  async function decreaseQuantity(item) {
+  // DIMINUIR QUANTIDADE
+  function decreaseQuantity(id) {
 
-    if(item.quantity <= 1){
-      removeItem(item.id)
-      return
-    }
+    const updatedCart = cartItems.map((item) => {
 
-    await supabase
-      .from('cart_items')
-      .update({
-        quantity: item.quantity - 1
-      })
-      .eq('id', item.id)
+      if(item.id === id){
 
-    loadCart()
+        return {
+          ...item,
+          quantity: item.quantity - 1
+        }
+      }
+
+      return item
+    })
+    .filter((item) => item.quantity > 0)
+
+    updateCart(updatedCart)
   }
 
-  async function finishOrder() {
+  // FINALIZAR COMPRA
+  function finishOrder() {
 
-    if(!user){
-      alert('Faça login primeiro')
+    if(cartItems.length === 0){
+      alert('Seu carrinho está vazio')
       return
     }
-
-    const { error } = await supabase
-      .from('orders')
-      .insert([
-        {
-          user_id: user.id,
-          total: total,
-        },
-      ])
-
-    if(error){
-      console.log(error)
-      alert('Erro ao finalizar compra')
-      return
-    }
-
-    await supabase
-      .from('cart_items')
-      .delete()
-      .eq('user_id', user.id)
 
     alert('Compra finalizada com sucesso!')
 
-    loadCart()
+    localStorage.removeItem('cart')
+
+    setCartItems([])
   }
 
-  const total = cartItems.reduce(
-    (acc, item) =>
-      acc + item.price * item.quantity,
-    0
-  )
+  // TOTAL
+  const total = cartItems.reduce((acc, item) => {
+
+    const price =
+      Number(
+        item.price
+          .replace('R$', '')
+          .replace(/\./g, '')
+          .replace(',', '.')
+      )
+
+    return acc + price * item.quantity
+
+  }, 0)
 
   return (
+
     <div className="cart-page">
 
       <Navbar />
@@ -123,7 +123,9 @@ function Cart() {
 
         <div className="cart-header">
 
-          <h1>Seu Carrinho</h1>
+          <h1>
+            Seu Carrinho
+          </h1>
 
           <p>
             Confira os produtos adicionados ao carrinho
@@ -133,80 +135,106 @@ function Cart() {
 
         <div className="cart-container">
 
+          {/* PRODUTOS */}
           <div className="cart-items">
 
-            {cartItems.map((item) => (
+            {cartItems.length === 0 ? (
 
-              <div
-                className="cart-card"
-                key={item.id}
-              >
+              <div className="empty-cart">
 
-                <div className="cart-image">
+                <h2>
+                  Seu carrinho está vazio
+                </h2>
 
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                  />
-
-                </div>
-
-                <div className="cart-info">
-
-                  <h2>{item.name}</h2>
-
-                  <p>
-                    Produto premium com design moderno.
-                  </p>
-
-                  <strong>
-                    R$ {item.price}
-                  </strong>
-
-                </div>
-
-                <div className="cart-quantity">
-
-                  <button
-                    onClick={() =>
-                      decreaseQuantity(item)
-                    }
-                  >
-                    <Minus size={16} />
-                  </button>
-
-                  <span>
-                    {item.quantity}
-                  </span>
-
-                  <button
-                    onClick={() =>
-                      increaseQuantity(item)
-                    }
-                  >
-                    <Plus size={16} />
-                  </button>
-
-                </div>
-
-                <div className="cart-remove">
-
-                  <button
-                    onClick={() =>
-                      removeItem(item.id)
-                    }
-                  >
-                    <Trash2 size={20} />
-                  </button>
-
-                </div>
+                <p>
+                  Adicione produtos para continuar
+                </p>
 
               </div>
 
-            ))}
+            ) : (
+
+              cartItems.map((item) => (
+
+                <div
+                  className="cart-card"
+                  key={item.id}
+                >
+
+                  {/* IMAGEM */}
+                  <div className="cart-image">
+
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                    />
+
+                  </div>
+
+                  {/* INFO */}
+                  <div className="cart-info">
+
+                    <h2>
+                      {item.name}
+                    </h2>
+
+                    <p>
+                      {item.description}
+                    </p>
+
+                    <strong>
+                      {item.price}
+                    </strong>
+
+                  </div>
+
+                  {/* QUANTIDADE */}
+                  <div className="cart-quantity">
+
+                    <button
+                      onClick={() =>
+                        decreaseQuantity(item.id)
+                      }
+                    >
+                      <Minus size={16} />
+                    </button>
+
+                    <span>
+                      {item.quantity}
+                    </span>
+
+                    <button
+                      onClick={() =>
+                        increaseQuantity(item.id)
+                      }
+                    >
+                      <Plus size={16} />
+                    </button>
+
+                  </div>
+
+                  {/* REMOVER */}
+                  <div className="cart-remove">
+
+                    <button
+                      onClick={() =>
+                        removeItem(item.id)
+                      }
+                    >
+                      <Trash2 size={20} />
+                    </button>
+
+                  </div>
+
+                </div>
+
+              ))
+
+            )}
 
           </div>
 
+          {/* RESUMO */}
           <div className="cart-summary">
 
             <h2>
@@ -215,17 +243,21 @@ function Cart() {
 
             <div className="summary-item">
 
-              <span>Subtotal</span>
+              <span>
+                Subtotal
+              </span>
 
               <strong>
-                R$ {total}
+                R$ {total.toFixed(2)}
               </strong>
 
             </div>
 
             <div className="summary-item">
 
-              <span>Frete</span>
+              <span>
+                Frete
+              </span>
 
               <strong>
                 Grátis
@@ -235,10 +267,12 @@ function Cart() {
 
             <div className="summary-total">
 
-              <span>Total</span>
+              <span>
+                Total
+              </span>
 
               <h3>
-                R$ {total}
+                R$ {total.toFixed(2)}
               </h3>
 
             </div>
@@ -259,7 +293,8 @@ function Cart() {
       <Footer />
 
     </div>
+
   )
 }
 
-export default Cart     
+export default Cart
