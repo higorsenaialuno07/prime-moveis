@@ -17,7 +17,8 @@ function Cart() {
 
     const formattedCart = savedCart.map((item) => ({
       ...item,
-      quantity: item.quantity || 1
+      quantity: item.quantity || 1,
+      price: Number(item.price)
     }))
 
     setCartItems(formattedCart)
@@ -100,17 +101,7 @@ function Cart() {
 
   // TOTAL
   const total = cartItems.reduce((acc, item) => {
-
-    const price =
-      Number(
-        item.price
-          .replace('R$', '')
-          .replace(/\./g, '')
-          .replace(',', '.')
-      )
-
-    return acc + price * item.quantity
-
+    return acc + Number(item.price) * item.quantity
   }, 0)
 
   return (
@@ -183,7 +174,7 @@ function Cart() {
                     </p>
 
                     <strong>
-                      {item.price}
+                      R$ {Number(item.price).toFixed(2)}
                     </strong>
 
                   </div>

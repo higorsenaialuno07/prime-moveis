@@ -109,3 +109,110 @@
 
   margin-top:30px;
 }
+
+/* =========================
+   DARK MODE CART
+========================= */
+
+body.dark .cart-page{
+  background:#020617;
+}
+
+/* HEADER */
+
+body.dark .cart-header h1{
+  color:#f8fafc;
+}
+
+body.dark .cart-header p{
+  color:#cbd5e1;
+}
+
+/* CARD */
+
+body.dark .cart-card{
+  background:#0f172a;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* INFO */
+
+body.dark .cart-info h2{
+  color:#f8fafc;
+}
+
+body.dark .cart-info p{
+  color:#cbd5e1;
+}
+
+body.dark .cart-info strong{
+  color:#38bdf8;
+}
+
+/* QUANTIDADE */
+
+body.dark .cart-quantity button{
+  background:#1e293b;
+  color:#f8fafc;
+}
+
+body.dark .cart-quantity span{
+  color:#f8fafc;
+}
+
+/* RESUMO */
+
+body.dark .cart-summary{
+  background:#0f172a;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+body.dark .cart-summary h2{
+  color:#f8fafc;
+}
+
+body.dark .summary-item span,
+body.dark .summary-total span{
+  color:#cbd5e1;
+}
+
+body.dark .summary-item strong,
+body.dark .summary-total h3{
+  color:#38bdf8;
+}
+
+/* BOTÃO FINALIZAR */
+
+body.dark .checkout-btn{
+  background:#38bdf8;
+  color:#fff;
+}
+
+body.dark .checkout-btn:hover{
+  background:#0ea5e9;
+}
+
+/* CARRINHO VAZIO */
+
+body.dark .empty-cart{
+  background:#0f172a;
+
+  border-radius:20px;
+
+  padding:40px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+}
+
+body.dark .empty-cart h2{
+  color:#f8fafc;
+}
+
+body.dark .empty-cart p{
+  color:#cbd5e1;
+}

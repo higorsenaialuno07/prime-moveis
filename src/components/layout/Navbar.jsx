@@ -2,9 +2,24 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 
 function Navbar() {
+
   const { user, signOut } = useAuth()
 
+  function toggleTheme() {
+
+  document.body.classList.toggle('dark')
+
+  const isDark =
+    document.body.classList.contains('dark')
+
+  localStorage.setItem(
+    'theme',
+    isDark ? 'dark' : 'light'
+  )
+
+}
   return (
+
     <header className="navbar">
 
       <div className="logo">
@@ -18,6 +33,14 @@ function Navbar() {
       </nav>
 
       <div className="navbar-actions">
+
+        {/* BOTÃO TEMA */}
+        <button
+          className="theme-btn"
+          onClick={toggleTheme}
+        >
+          🌙
+        </button>
 
         {user ? (
           <>

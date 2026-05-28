@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
@@ -9,6 +9,64 @@ import tableImage from '../assets/images/table.jpeg'
 import chairImage from '../assets/images/cadeira-premium.jpeg'
 
 function Home() {
+
+  const navigate = useNavigate()
+
+  function handleBuy(product) {
+
+    const cart =
+      JSON.parse(localStorage.getItem('cart')) || []
+
+    const existingProduct = cart.find(
+      (item) => item.id === product.id
+    )
+
+    if(existingProduct){
+
+      existingProduct.quantity += 1
+
+    } else {
+
+      cart.push({
+        ...product,
+        quantity:1
+      })
+
+    }
+
+    localStorage.setItem(
+      'cart',
+      JSON.stringify(cart)
+    )
+
+    alert('Produto adicionado ao carrinho!')
+
+    navigate('/cart')
+  }
+
+  const sofaProduct = {
+    id:1,
+    name:'Sofá Luxury',
+    description:'Design sofisticado para ambientes premium.',
+    price:'R$ 2599.98',
+    image:sofaLuxury
+  }
+
+  const tableProduct = {
+    id:2,
+    name:'Mesa Elegance',
+    description:'Perfeita para salas modernas.',
+    price:'R$ 771.86',
+    image:tableImage
+  }
+
+  const chairProduct = {
+    id:3,
+    name:'Cadeira Premium',
+    description:'Conforto e elegância no mesmo produto.',
+    price:'R$ 1900',
+    image:chairImage
+  }
 
   return (
 
@@ -35,7 +93,6 @@ function Home() {
             contemporâneo.
           </p>
 
-          {/* BOTÕES FUNCIONANDO */}
           <div className="hero-buttons">
 
             <Link
@@ -46,11 +103,11 @@ function Home() {
             </Link>
 
             <Link
-  to="/catalogo"
-  className="secondary-btn"
->
-  Ver Catálogo
-</Link>
+              to="/catalogo"
+              className="secondary-btn"
+            >
+              Ver Catálogo
+            </Link>
 
           </div>
 
@@ -110,7 +167,7 @@ function Home() {
         <div className="products-grid">
 
           {/* PRODUCT 1 */}
-          <div className="product-card-sofa">
+          <div className="product-card">
 
             <div className="product-image">
 
@@ -141,7 +198,10 @@ function Home() {
 
                 </div>
 
-                <button className="product-btn">
+                <button
+                  className="product-btn"
+                  onClick={() => handleBuy(sofaProduct)}
+                >
                   Comprar
                 </button>
 
@@ -183,7 +243,10 @@ function Home() {
 
                 </div>
 
-                <button className="product-btn">
+                <button
+                  className="product-btn"
+                  onClick={() => handleBuy(tableProduct)}
+                >
                   Comprar
                 </button>
 
@@ -225,7 +288,10 @@ function Home() {
 
                 </div>
 
-                <button className="product-btn">
+                <button
+                  className="product-btn"
+                  onClick={() => handleBuy(chairProduct)}
+                >
                   Comprar
                 </button>
 

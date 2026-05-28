@@ -59,7 +59,7 @@ function Catalogo() {
       category: 'Sofás',
       description:
         'Design sofisticado para ambientes premium.',
-      price: 'R$ 2.599,98',
+      price: 2599.98,
       image: sofaLuxury
     },
 
@@ -69,7 +69,7 @@ function Catalogo() {
       category: 'Mesas',
       description:
         'Perfeita para salas modernas.',
-      price: 'R$ 771,86',
+      price: 771.86,
       image: tableImage
     },
 
@@ -79,7 +79,7 @@ function Catalogo() {
       category: 'Cadeiras',
       description:
         'Conforto e elegância no mesmo produto.',
-      price: 'R$ 1.900,00',
+      price: 1900,
       image: chairImage
     },
 
@@ -89,7 +89,7 @@ function Catalogo() {
       category: 'Poltronas',
       description:
         'Conforto absoluto com acabamento refinado.',
-      price: 'R$ 940,71',
+      price: 940.71,
       image: poltronaImage
     },
 
@@ -99,7 +99,7 @@ function Catalogo() {
       category: 'Racks',
       description:
         'Ideal para salas sofisticadas e modernas.',
-      price: 'R$ 865,72',
+      price: 865.72,
       image: rackImage
     },
 
@@ -109,7 +109,7 @@ function Catalogo() {
       category: 'Escritório',
       description:
         'Perfeita para home office profissional.',
-      price: 'R$ 572,55',
+      price: 572.55,
       image: officeImage
     }
 

@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import Dashboard from "./pages/Dashboard";
@@ -18,15 +20,32 @@ import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 
 function App() {
+
+  useEffect(() => {
+
+    const savedTheme =
+      localStorage.getItem('theme')
+
+    if(savedTheme === 'dark'){
+
+      document.body.classList.add('dark')
+
+    }
+
+  }, [])
+
   return (
+
     <Routes>
 
-      <Route path="/" element={<Navigate to="/login" replace />} />
+      <Route
+        path="/"
+        element={<Navigate to="/login" replace />}
+      />
 
       <Route path="/login" element={<Login />} />
       <Route path="/cart" element={<Cart />} />
 
-      {/* PRODUTOS */}
       <Route path="/products" element={<Products />} />
       <Route path="/catalogo" element={<Catalogo />} />
       <Route path="/products/:id" element={<ProductView />} />

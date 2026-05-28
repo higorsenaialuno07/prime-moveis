@@ -20,8 +20,9 @@
 
   box-shadow:
     0 2px 20px rgba(0,0,0,0.05);
-}
 
+  transition:0.3s;
+}
 /* TABLET */
 
 @media(max-width:900px){
@@ -477,4 +478,86 @@
   display:flex;
   align-items:center;
   justify-content:center;
+}
+
+/* =========================
+   DARK MODE NAVBAR
+========================= */
+
+body.dark .navbar{
+  background:rgba(15,23,42,0.95);
+
+  box-shadow:
+    0 2px 20px rgba(0,0,0,0.4);
+}
+
+/* LOGO */
+
+body.dark .logo{
+  color:#f8fafc;
+}
+
+/* LINKS */
+
+body.dark .nav-links a{
+  color:#e2e8f0;
+}
+
+body.dark .nav-links a:hover{
+  color:#38bdf8;
+}
+
+body.dark .nav-links a::after{
+  background:#38bdf8;
+}
+
+/* BOTÃO LOGIN */
+
+body.dark .login-btn{
+  background:#38bdf8;
+  color:#fff;
+}
+
+body.dark .login-btn:hover{
+  background:#0ea5e9;
+}
+
+/* BOTÃO CARRINHO */
+
+body.dark .cart-btn{
+  background:#1e293b;
+  color:#f8fafc;
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.35);
+}
+
+body.dark .cart-btn:hover{
+  background:#334155;
+}
+
+/* DASHBOARD */
+
+body.dark .dashboard-btn{
+  background:#0ea5e9;
+}
+
+body.dark .dashboard-btn:hover{
+  background:#0284c7;
+}
+
+/* LOGOUT */
+
+body.dark .logout-btn{
+  background:#dc2626;
+}
+
+body.dark .logout-btn:hover{
+  background:#b91c1c;
+}
+
+/* MENU MOBILE */
+
+body.dark .nav-links{
+  background:#0f172a;
 }
