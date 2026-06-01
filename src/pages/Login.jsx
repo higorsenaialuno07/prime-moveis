@@ -1,76 +1,54 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import { useTheme } from '../context/ThemeContext.jsx'
+import '../styles/pages/auth.css'
 
 function Login() {
 
-  const {
-    signIn,
-    signUp,
-  } = useAuth()
-
+  const { signIn, signUp } = useAuth()
   const navigate = useNavigate()
+  const { theme } = useTheme()
 
   const [isRegister, setIsRegister] = useState(false)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
   const [loading, setLoading] = useState(false)
 
   async function handleSubmit(e) {
-
     e.preventDefault()
-
     setLoading(true)
 
     try {
+      let error
 
       if (isRegister) {
+        ({ error } = await signUp(email, password))
 
-        const { error } = await signUp(
-          email,
-          password
-        )
-
-        if (error) {
-          alert(error.message)
-          return
+        if (!error) {
+          alert('Conta criada com sucesso!')
         }
-
-        alert('Conta criada com sucesso!')
-
       } else {
+        ({ error } = await signIn(email, password))
 
-        const { error } = await signIn(
-          email,
-          password
-        )
-
-        if (error) {
-          alert(error.message)
-          return
+        if (!error) {
+          navigate('/dashboard')
         }
-
-        navigate('/dashboard')
-
       }
 
-    } catch (err) {
+      if (error) {
+        alert(error.message)
+      }
 
+    } catch {
       alert('Erro inesperado.')
-
     } finally {
-
       setLoading(false)
-
     }
-
   }
 
   return (
-
-    <section className="auth-page">
+    <section className={`auth-page ${theme}`}>
 
       <div className="auth-overlay"></div>
 
@@ -83,88 +61,56 @@ function Login() {
           </span>
 
           <h1>
-            {isRegister
-              ? 'Crie sua conta'
-              : 'Bem-vindo novamente'}
+            {isRegister ? 'Crie sua conta' : 'Bem-vindo novamente'}
           </h1>
 
           <p>
-            Acesse a plataforma premium
-            da Prime Móveis e descubra
-            móveis modernos e sofisticados.
+            Acesse a plataforma premium da Prime Móveis e descubra móveis modernos e sofisticados.
           </p>
 
         </div>
 
         <div className="auth-right">
 
-          <form
-            className="auth-form"
-            onSubmit={handleSubmit}
-          >
+          <form className="auth-form" onSubmit={handleSubmit}>
 
             <h2>
-              {isRegister
-                ? 'Criar Conta'
-                : 'Entrar'}
+              {isRegister ? 'Criar Conta' : 'Entrar'}
             </h2>
 
             <div className="input-group">
-
               <label>Email</label>
-
               <input
                 type="email"
                 placeholder="Digite seu email"
                 value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-
             </div>
 
             <div className="input-group">
-
               <label>Senha</label>
-
               <input
                 type="password"
                 placeholder="Digite sua senha"
                 value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
-
             </div>
 
-            <button
-              type="submit"
-              className="auth-btn"
-            >
-
-              {loading
-                ? 'Carregando...'
-                : isRegister
-                  ? 'Cadastrar'
-                  : 'Entrar'}
-
+            <button type="submit" className="auth-btn">
+              {loading ? 'Carregando...' : isRegister ? 'Cadastrar' : 'Entrar'}
             </button>
 
             <span
               className="switch-auth"
-              onClick={() =>
-                setIsRegister(!isRegister)
-              }
+              onClick={() => setIsRegister(!isRegister)}
             >
-
               {isRegister
                 ? 'Já possui conta? Entrar'
                 : 'Não possui conta? Criar conta'}
-
             </span>
 
           </form>
@@ -174,7 +120,6 @@ function Login() {
       </div>
 
     </section>
-
   )
 }
 

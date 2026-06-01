@@ -250,3 +250,11 @@ body.dark .sidebar {
     #0f172a
   );
 }
+
+/* Altere apenas este bloco no seu arquivo CSS */
+
+/* EM PRODUÇÃO */
+.status.em-produco {
+  background: #eff6ff;
+  color: #1d4ed8;
+}

@@ -3,7 +3,6 @@ import { useThemeContext } from '../context/ThemeContext'
 import '../styles/pages/orders.css'
 
 function Orders() {
-
   const { theme } = useThemeContext()
 
   const orders = [
@@ -12,8 +11,9 @@ function Orders() {
     { id: 3, client: 'Carlos Lima', total: 540, status: 'Em produção', date: '23/05/2026' }
   ]
 
+  // Remove espaços E acentos (Ex: "Em produção" vira "em-producao")
   const formatStatus = (status) =>
-    status.toLowerCase().replace(/\s/g, '-')
+    status.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '-')
 
   const formatCurrency = (value) =>
     value.toLocaleString('pt-BR', {
@@ -36,12 +36,10 @@ function Orders() {
           <Link to="/settings">Configurações</Link>
           <Link to="/logout" className="logout-btn">Sair</Link>
         </nav>
-        
       </aside>
 
       {/* MAIN */}
       <main className="dashboard-main">
-
         {/* HEADER */}
         <header className="dashboard-header">
           <div>
@@ -52,18 +50,13 @@ function Orders() {
 
         {/* ORDERS */}
         <section className="orders-section">
-
           <div className="orders-grid">
-
             {orders.map((order) => (
               <article key={order.id} className="order-card">
-
                 <div className="order-top">
                   <div>
                     <h3>Pedido #{order.id}</h3>
-<small>
-  {order.date}
-</small>
+                    <small>{order.date}</small>
                   </div>
 
                   <span className={`status ${formatStatus(order.status)}`}>
@@ -77,30 +70,18 @@ function Orders() {
                 </div>
 
                 <div className="order-actions">
+                  <Link to={`/orders/edit/${order.id}`} className="btn-secondary">
+                    Editar
+                  </Link>
 
-  <Link
-    to={`/orders/edit/${order.id}`}
-    className="btn-secondary"
-  >
-    Editar
-  </Link>
-
-  <Link
-    to={`/orders/${order.id}`}
-    className="btn-primary"
-  >
-    Ver detalhes
-  </Link>
-
-</div>
-
+                  <Link to={`/orders/${order.id}`} className="btn-primary">
+                    Ver detalhes
+                  </Link>
+                </div>
               </article>
             ))}
-
           </div>
-
         </section>
-
       </main>
     </div>
   )
