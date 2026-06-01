@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom'
+import { useThemeContext } from '../context/ThemeContext'
 import '../styles/pages/orders.css'
 
 function Orders() {
+
+  const { theme } = useThemeContext()
+
   const orders = [
     { id: 1, client: 'João Silva', total: 1200, status: 'Pendente', date: '25/05/2026' },
     { id: 2, client: 'Maria Souza', total: 850, status: 'Entregue', date: '24/05/2026' },
@@ -18,8 +22,7 @@ function Orders() {
     })
 
   return (
-    <div className="dashboard-page">
-
+    <div className={`dashboard-page ${theme}`}>
       {/* SIDEBAR */}
       <aside className="sidebar">
         <h2 className="sidebar-logo">Prime Móveis</h2>

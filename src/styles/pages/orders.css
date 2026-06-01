@@ -195,3 +195,58 @@
 .btn-primary:hover {
   background: #0284c7;
 }
+
+/* =========================
+   TEMA ESCURO
+========================= */
+
+body.dark .dashboard-page {
+  background: #0f172a;
+}
+
+body.dark .dashboard-header {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .dashboard-header h1 {
+  color: #f8fafc;
+}
+
+body.dark .dashboard-header p {
+  color: #94a3b8;
+}
+
+body.dark .order-card {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+body.dark .order-top h3 {
+  color: #f8fafc;
+}
+
+body.dark .order-top small {
+  color: #94a3b8;
+}
+
+body.dark .order-card p {
+  color: #cbd5e1;
+}
+
+body.dark .btn-secondary {
+  background: #334155;
+  color: #f8fafc;
+}
+
+body.dark .btn-secondary:hover {
+  background: #475569;
+}
+
+body.dark .sidebar {
+  background: linear-gradient(
+    180deg,
+    #020617,
+    #0f172a
+  );
+}

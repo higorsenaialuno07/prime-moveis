@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import {
+  useThemeContext
+} from '../context/ThemeContext'
 import '../styles/pages/settings.css'
 
 function Settings() {
 
   const [notifications, setNotifications] = useState(true)
-  const [darkTheme, setDarkTheme] = useState(false)
   const [backup, setBackup] = useState(true)
+  const {
+  theme,
+  toggleTheme
+} = useThemeContext()
 
   // 💾 CARREGAR
   useEffect(() => {
@@ -16,54 +22,36 @@ function Settings() {
       const data = JSON.parse(saved)
 
       setNotifications(data.notifications ?? true)
-      setDarkTheme(data.darkTheme ?? false)
       setBackup(data.backup ?? true)
     }
   }, [])
 
   // 💾 SALVAR
   useEffect(() => {
-    localStorage.setItem(
-      'settings',
-      JSON.stringify({
-        notifications,
-        darkTheme,
-        backup
-      })
-    )
-  }, [notifications, darkTheme, backup])
+   localStorage.setItem(
+  'settings',
+  JSON.stringify({
+    notifications,
+    backup
+  })
+)
+  }, [notifications, backup])
 
-  // 🌙 TEMA GLOBAL (CORRIGIDO)
-  useEffect(() => {
-    if (darkTheme) {
-      document.body.classList.add('dark')
-    } else {
-      document.body.classList.remove('dark')
-    }
-  }, [darkTheme])
 
-  // ⚡ TEMA AUTOMÁTICO (primeira vez)
-  useEffect(() => {
-    const saved = localStorage.getItem('settings')
 
-    if (!saved) {
-      const systemDark = window.matchMedia(
-        '(prefers-color-scheme: dark)'
-      ).matches
 
-      setDarkTheme(systemDark)
-    }
-  }, [])
 
   // 🔄 RESET
   function resetSettings() {
-    setNotifications(true)
-    setDarkTheme(false)
-    setBackup(true)
+  setNotifications(true)
+  setBackup(true)
 
-    localStorage.removeItem('settings')
-    document.body.classList.remove('dark')
+  localStorage.removeItem('settings')
+
+  if (theme === 'dark') {
+    toggleTheme()
   }
+}
 
   return (
     <div className="dashboard-page">
@@ -156,10 +144,10 @@ function Settings() {
                 <td>
                   <label className="switch">
                     <input
-                      type="checkbox"
-                      checked={darkTheme}
-                      onChange={() => setDarkTheme(!darkTheme)}
-                    />
+  type="checkbox"
+  checked={theme === 'dark'}
+  onChange={toggleTheme}
+/>
                     <span className="slider"></span>
                   </label>
                 </td>
