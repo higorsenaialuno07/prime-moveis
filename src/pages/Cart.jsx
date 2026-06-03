@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { supabase } from '../services/supabase'
 
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
@@ -8,9 +9,12 @@ import { Trash2, Plus, Minus } from 'lucide-react'
 function Cart() {
 
   const [cartItems, setCartItems] = useState([])
+  const [clients, setClients] = useState([])
+  const [selectedClient, setSelectedClient] = useState('')
 
-  // CARREGAR CARRINHO
   useEffect(() => {
+
+    loadClients()
 
     const savedCart =
       JSON.parse(localStorage.getItem('cart')) || []
@@ -25,7 +29,21 @@ function Cart() {
 
   }, [])
 
-  // SALVAR CARRINHO
+  async function loadClients() {
+
+    const { data, error } = await supabase
+      .from('clients')
+      .select('*')
+      .order('name')
+
+    if (error) {
+      console.error(error)
+      return
+    }
+
+    setClients(data || [])
+  }
+
   function updateCart(items) {
 
     setCartItems(items)
@@ -36,7 +54,6 @@ function Cart() {
     )
   }
 
-  // REMOVER ITEM
   function removeItem(id) {
 
     const updatedCart =
@@ -45,12 +62,11 @@ function Cart() {
     updateCart(updatedCart)
   }
 
-  // AUMENTAR QUANTIDADE
   function increaseQuantity(id) {
 
     const updatedCart = cartItems.map((item) => {
 
-      if(item.id === id){
+      if (item.id === id) {
 
         return {
           ...item,
@@ -64,42 +80,71 @@ function Cart() {
     updateCart(updatedCart)
   }
 
-  // DIMINUIR QUANTIDADE
   function decreaseQuantity(id) {
 
-    const updatedCart = cartItems.map((item) => {
+    const updatedCart = cartItems
+      .map((item) => {
 
-      if(item.id === id){
+        if (item.id === id) {
 
-        return {
-          ...item,
-          quantity: item.quantity - 1
+          return {
+            ...item,
+            quantity: item.quantity - 1
+          }
         }
-      }
 
-      return item
-    })
-    .filter((item) => item.quantity > 0)
+        return item
+      })
+      .filter((item) => item.quantity > 0)
 
     updateCart(updatedCart)
   }
 
-  // FINALIZAR COMPRA
-  function finishOrder() {
+  async function finishOrder() {
 
-    if(cartItems.length === 0){
+    if (cartItems.length === 0) {
       alert('Seu carrinho está vazio')
+      return
+    }
+
+    if (!selectedClient) {
+      alert('Selecione um cliente')
+      return
+    }
+
+    const {
+      data: { user }
+    } = await supabase.auth.getUser()
+
+    const total = cartItems.reduce(
+      (acc, item) =>
+        acc + Number(item.price) * item.quantity,
+      0
+    )
+
+    const { error } = await supabase
+      .from('orders')
+      .insert([
+        {
+          user_id: user.id,
+          client: selectedClient,
+          total,
+          status: 'Pendente'
+        }
+      ])
+
+    if (error) {
+      alert(error.message)
       return
     }
 
     alert('Compra finalizada com sucesso!')
 
     localStorage.removeItem('cart')
-
     setCartItems([])
+    setSelectedClient('')
   }
 
-  // TOTAL
   const total = cartItems.reduce((acc, item) => {
     return acc + Number(item.price) * item.quantity
   }, 0)
@@ -114,9 +159,7 @@ function Cart() {
 
         <div className="cart-header">
 
-          <h1>
-            Seu Carrinho
-          </h1>
+          <h1>Seu Carrinho</h1>
 
           <p>
             Confira os produtos adicionados ao carrinho
@@ -126,7 +169,6 @@ function Cart() {
 
         <div className="cart-container">
 
-          {/* PRODUTOS */}
           <div className="cart-items">
 
             {cartItems.length === 0 ? (
@@ -152,7 +194,6 @@ function Cart() {
                   key={item.id}
                 >
 
-                  {/* IMAGEM */}
                   <div className="cart-image">
 
                     <img
@@ -162,7 +203,6 @@ function Cart() {
 
                   </div>
 
-                  {/* INFO */}
                   <div className="cart-info">
 
                     <h2>
@@ -179,7 +219,6 @@ function Cart() {
 
                   </div>
 
-                  {/* QUANTIDADE */}
                   <div className="cart-quantity">
 
                     <button
@@ -204,7 +243,6 @@ function Cart() {
 
                   </div>
 
-                  {/* REMOVER */}
                   <div className="cart-remove">
 
                     <button
@@ -225,7 +263,6 @@ function Cart() {
 
           </div>
 
-          {/* RESUMO */}
           <div className="cart-summary">
 
             <h2>
@@ -265,6 +302,38 @@ function Cart() {
               <h3>
                 R$ {total.toFixed(2)}
               </h3>
+
+            </div>
+
+            <div className="client-select">
+
+              <label>
+                Cliente
+              </label>
+
+              <select
+                value={selectedClient}
+                onChange={(e) =>
+                  setSelectedClient(e.target.value)
+                }
+              >
+
+                <option value="">
+                  Selecione um cliente
+                </option>
+
+                {clients.map((client) => (
+
+                  <option
+                    key={client.id}
+                    value={client.name}
+                  >
+                    {client.name}
+                  </option>
+
+                ))}
+
+              </select>
 
             </div>
 

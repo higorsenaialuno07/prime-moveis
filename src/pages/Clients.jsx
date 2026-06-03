@@ -1,75 +1,73 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
-import "../styles/pages/clients.css";
+import { supabase } from '../services/supabase'
+
+import '../styles/pages/clients.css'
 
 function Clients() {
 
-  const [clients, setClients] = useState(() => {
+  const [clients, setClients] = useState([])
 
-    const savedClients = localStorage.getItem("clients");
-
-    return savedClients
-      ? JSON.parse(savedClients)
-      : [
-          {
-            id: 1,
-            name: "Lucas Silva",
-            email: "lucas@gmail.com",
-            status: "Ativo",
-          },
-
-          {
-            id: 2,
-            name: "Maria Souza",
-            email: "maria@gmail.com",
-            status: "Pendente",
-          },
-        ];
-  });
-
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
 
   useEffect(() => {
+    loadClients()
+  }, [])
 
-    localStorage.setItem(
-      "clients",
-      JSON.stringify(clients)
-    );
+  async function loadClients() {
 
-  }, [clients]);
+    const { data, error } = await supabase
+      .from('clients')
+      .select('*')
+      .order('created_at', {
+        ascending: false,
+      })
 
-  function addClient(e) {
-
-    e.preventDefault();
-
-    if (!name || !email) {
-
-      alert("Preencha todos os campos");
-      return;
-
+    if (error) {
+      console.error(error)
+      return
     }
 
-    const newClient = {
+    setClients(data || [])
+  }
 
-      id: Date.now(),
-      name,
-      email,
-      status: "Ativo",
+  async function addClient(e) {
 
-    };
+    e.preventDefault()
 
-    setClients((prevClients) => [
-      ...prevClients,
-      newClient
-    ]);
+    if (!name || !email) {
+      alert('Preencha todos os campos')
+      return
+    }
 
-    setName("");
-    setEmail("");
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-    alert("Cliente adicionado!");
+    const { error } = await supabase
+      .from('clients')
+      .insert([
+        {
+          user_id: user.id,
+          name,
+          email,
+          status: 'Ativo',
+        },
+      ])
 
+    if (error) {
+      alert(error.message)
+      return
+    }
+
+    setName('')
+    setEmail('')
+
+    await loadClients()
+
+    alert('Cliente adicionado!')
   }
 
   return (
@@ -223,7 +221,7 @@ function Clients() {
       </main>
 
     </div>
-  );
+  )
 }
 
-export default Clients;
+export default Clients

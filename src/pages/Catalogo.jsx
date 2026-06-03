@@ -2,8 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
-
-import { supabase } from '../services/supabase'
+import ThemeContext from '../context/ThemeContext'
 import { useAuth } from '../context/AuthContext'
 
 import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
@@ -16,6 +15,9 @@ import officeImage from '../assets/images/mesa-office.jpeg'
 import '../styles/pages/catalogo.css'
 
 function Catalogo() {
+
+  const { theme, toggleTheme } =
+  useContext(ThemeContext)
 
   const navigate = useNavigate()
 

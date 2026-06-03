@@ -1,106 +1,193 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+
 import { useThemeContext } from '../context/ThemeContext'
+import { supabase } from '../services/supabase'
+
 import '../styles/pages/orders.css'
 
 function Orders() {
-
   const { theme } = useThemeContext()
 
-  const orders = [
-    { id: 1, client: 'João Silva', total: 1200, status: 'Pendente', date: '25/05/2026' },
-    { id: 2, client: 'Maria Souza', total: 850, status: 'Entregue', date: '24/05/2026' },
-    { id: 3, client: 'Carlos Lima', total: 540, status: 'Em produção', date: '23/05/2026' }
-  ]
+  const [orders, setOrders] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const formatStatus = (status) =>
-    status.toLowerCase().replace(/\s/g, '-')
+  useEffect(() => {
+    loadOrders()
+  }, [])
+
+  async function loadOrders() {
+    try {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', {
+          ascending: false
+        })
+
+      if (error) {
+        console.error(error)
+        return
+      }
+
+      setOrders(data || [])
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const formatStatus = (status = '') =>
+    status
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s/g, '-')
 
   const formatCurrency = (value) =>
-    value.toLocaleString('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    })
+    Number(value || 0).toLocaleString(
+      'pt-BR',
+      {
+        style: 'currency',
+        currency: 'BRL'
+      }
+    )
 
   return (
     <div className={`dashboard-page ${theme}`}>
-      {/* SIDEBAR */}
       <aside className="sidebar">
-        <h2 className="sidebar-logo">Prime Móveis</h2>
+        <h2 className="sidebar-logo">
+          Prime Móveis
+        </h2>
 
         <nav className="sidebar-nav">
-          <Link to="/dashboard">Dashboard</Link>
-          <Link to="/products">Produtos</Link>
-          <Link to="/orders" className="active">Pedidos</Link>
-          <Link to="/clients">Clientes</Link>
-          <Link to="/reports">Relatórios</Link>
-          <Link to="/settings">Configurações</Link>
-          <Link to="/logout" className="logout-btn">Sair</Link>
+          <Link to="/dashboard">
+            Dashboard
+          </Link>
+
+          <Link to="/products">
+            Produtos
+          </Link>
+
+          <Link
+            to="/orders"
+            className="active"
+          >
+            Pedidos
+          </Link>
+
+          <Link to="/clients">
+            Clientes
+          </Link>
+
+          <Link to="/reports">
+            Relatórios
+          </Link>
+
+          <Link to="/settings">
+            Configurações
+          </Link>
+
+          <Link
+            to="/logout"
+            className="logout-btn"
+          >
+            Sair
+          </Link>
         </nav>
-        
       </aside>
 
-      {/* MAIN */}
       <main className="dashboard-main">
-
-        {/* HEADER */}
         <header className="dashboard-header">
           <div>
             <h1>Pedidos</h1>
-            <p>Gerencie todos os pedidos do sistema</p>
+
+            <p>
+              Gerencie todos os pedidos
+              do sistema
+            </p>
           </div>
         </header>
 
-        {/* ORDERS */}
         <section className="orders-section">
+          {loading ? (
+            <p>Carregando pedidos...</p>
+          ) : orders.length === 0 ? (
+            <p>Nenhum pedido encontrado.</p>
+          ) : (
+            <div className="orders-grid">
+              {orders.map((order) => (
+                <article
+                  key={order.id}
+                  className="order-card"
+                >
+                  <div className="order-top">
+                    <div>
+                      <h3>
+                        Pedido #{order.id}
+                      </h3>
 
-          <div className="orders-grid">
+                      <small>
+                        {order.created_at
+                          ? new Date(
+                              order.created_at
+                            ).toLocaleDateString(
+                              'pt-BR'
+                            )
+                          : '-'}
+                      </small>
+                    </div>
 
-            {orders.map((order) => (
-              <article key={order.id} className="order-card">
-
-                <div className="order-top">
-                  <div>
-                    <h3>Pedido #{order.id}</h3>
-<small>
-  {order.date}
-</small>
+                    <span
+                      className={`status ${formatStatus(
+                        order.status
+                      )}`}
+                    >
+                      {order.status ||
+                        'Sem status'}
+                    </span>
                   </div>
 
-                  <span className={`status ${formatStatus(order.status)}`}>
-                    {order.status}
-                  </span>
-                </div>
+                  <div className="order-info">
+                    <p>
+                      <strong>
+                        Cliente:
+                      </strong>{' '}
+                      {order.client ||
+                        'Não informado'}
+                    </p>
 
-                <div className="order-info">
-                  <p><strong>Cliente:</strong> {order.client}</p>
-                  <p><strong>Total:</strong> {formatCurrency(order.total)}</p>
-                </div>
+                    <p>
+                      <strong>
+                        Total:
+                      </strong>{' '}
+                      {formatCurrency(
+                        order.total
+                      )}
+                    </p>
+                  </div>
 
-                <div className="order-actions">
+                  <div className="order-actions">
+                    <Link
+                      to={`/orders/edit/${order.id}`}
+                      className="btn-secondary"
+                    >
+                      Editar
+                    </Link>
 
-  <Link
-    to={`/orders/edit/${order.id}`}
-    className="btn-secondary"
-  >
-    Editar
-  </Link>
-
-  <Link
-    to={`/orders/${order.id}`}
-    className="btn-primary"
-  >
-    Ver detalhes
-  </Link>
-
-</div>
-
-              </article>
-            ))}
-
-          </div>
-
+                    <Link
+                      to={`/orders/${order.id}`}
+                      className="btn-primary"
+                    >
+                      Ver detalhes
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
-
       </main>
     </div>
   )

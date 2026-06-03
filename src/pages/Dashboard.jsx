@@ -175,35 +175,41 @@ function Dashboard() {
 
             <tbody>
 
-              {orders.map((order) => (
+  {orders.map((order) => (
 
-                <tr key={order.id}>
+    <tr key={order.id}>
 
-                  <td>
-                    {order.user_id}
-                  </td>
+      <td>
+        {order.client}
+      </td>
 
-                  <td>
-                    Pedido Finalizado
-                  </td>
+      <td>
+        Pedido Finalizado
+      </td>
 
-                  <td>
-                    R$ {order.total}
-                  </td>
+      <td>
+        R$ {Number(order.total).toFixed(2)}
+      </td>
 
-                  <td>
+      <td>
 
-                    <span className="status delivered">
-                      Pago
-                    </span>
+        <span
+          className={`status ${
+            order.status?.toLowerCase() === 'pendente'
+              ? 'pending'
+              : 'delivered'
+          }`}
+        >
+          {order.status}
+        </span>
 
-                  </td>
+      </td>
 
-                </tr>
+    </tr>
 
-              ))}
+  ))}
 
-            </tbody>
+</tbody>
 
           </table>
 

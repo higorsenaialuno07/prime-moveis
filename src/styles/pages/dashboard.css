@@ -318,3 +318,8 @@ td{
   }
 
 }
+
+.status.production{
+  background:#dbeafe;
+  color:#1d4ed8;
+}

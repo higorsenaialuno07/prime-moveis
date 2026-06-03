@@ -380,3 +380,159 @@
   }
 
 }
+
+/* =========================
+   DARK MODE
+========================= */
+
+body.dark .catalog-page{
+  background:#020617;
+}
+
+/* HERO */
+
+body.dark .catalog-hero{
+  background:
+    linear-gradient(
+      rgba(2,6,23,0.85),
+      rgba(15,23,42,0.85)
+    ),
+    url('../../assets/images/Cama.jpeg');
+
+  background-size:cover;
+  background-position:center;
+}
+
+/* INFO */
+
+body.dark .info-card{
+  background:#0f172a;
+
+  border:1px solid rgba(255,255,255,0.05);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.45);
+}
+
+body.dark .info-card h2{
+  color:#f8fafc;
+}
+
+body.dark .info-card p{
+  color:#94a3b8;
+}
+
+/* TITULOS */
+
+body.dark .catalog-title h2{
+  color:#f8fafc;
+}
+
+body.dark .catalog-title p{
+  color:#94a3b8;
+}
+
+body.dark .catalog-title span{
+  color:#38bdf8;
+}
+
+/* CARDS */
+
+body.dark .catalog-card{
+  background:#0f172a;
+
+  border:1px solid rgba(255,255,255,0.05);
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.45);
+}
+
+body.dark .catalog-content h3{
+  color:#f8fafc;
+}
+
+body.dark .catalog-content p{
+  color:#94a3b8;
+}
+
+body.dark .catalog-category{
+  background:#1e293b;
+  color:#f8fafc;
+}
+
+body.dark .catalog-price{
+  color:#38bdf8;
+}
+
+/* BOTÃO COMPRAR */
+
+body.dark .catalog-buy-btn{
+  background:#38bdf8;
+  color:white;
+}
+
+body.dark .catalog-buy-btn:hover{
+  background:#0ea5e9;
+}
+
+/* CTA */
+
+body.dark .catalog-cta{
+  background:
+    linear-gradient(
+      135deg,
+      #020617,
+      #0f172a
+    );
+}
+
+body.dark .cta-content h2{
+  color:white;
+}
+
+body.dark .cta-content p{
+  color:#cbd5e1;
+}
+
+body.dark .cta-btn{
+  background:#38bdf8;
+  color:white;
+}
+
+body.dark .cta-btn:hover{
+  background:#0ea5e9;
+}
+
+body.dark .catalog-btn-primary{
+  background:#38bdf8;
+  color:white;
+}
+
+body.dark .catalog-btn-primary:hover{
+  background:#0ea5e9;
+}
+
+.theme-toggle{
+  border:none;
+  cursor:pointer;
+
+  width:45px;
+  height:45px;
+
+  border-radius:50%;
+
+  background:#f1f5f9;
+
+  font-size:1.1rem;
+
+  transition:.3s;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.08);
+}
+
+body.dark .theme-toggle{
+  background:#1e293b;
+  color:white;
+}

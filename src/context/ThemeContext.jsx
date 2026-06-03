@@ -55,3 +55,8 @@ export function ThemeProvider({
 export function useThemeContext() {
   return useContext(ThemeContext)
 }
+
+export function useTheme() {
+  return useContext(ThemeContext)
+}
+
