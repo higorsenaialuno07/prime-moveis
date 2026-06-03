@@ -12,46 +12,41 @@ function Orders() {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
 
-useEffect(() => {
-  loadOrders()
-}, [])
+  useEffect(() => {
+    loadOrders()
+  }, [])
 
-async function loadOrders() {
-  try {
-    const { data, error } = await supabase
-      .from('orders')
-      .select('*')
-      .order('created_at', {
-        ascending: false
-      })
+  async function loadOrders() {
+    try {
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
+        .order('created_at', {
+          ascending: false
+        })
 
-    if (error) {
+      if (error) throw error
+
+      setOrders(data || [])
+    } catch (error) {
       console.error(error)
-      return
+    } finally {
+      setLoading(false)
     }
-
-    setOrders(data || [])
-  } catch (err) {
-    console.error(err)
-  } finally {
-    setLoading(false)
   }
-}
 
-const formatStatus = (status = '') =>
-  status
-    .toLowerCase()
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .replace(/\s/g, '-')
+  const formatStatus = (status = '') =>
+    status
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/\s/g, '-')
+
   const formatCurrency = (value) =>
-    Number(value || 0).toLocaleString(
-      'pt-BR',
-      {
-        style: 'currency',
-        currency: 'BRL'
-      }
-    )
+    Number(value || 0).toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
 
   return (
     <div className={`dashboard-page ${theme}`}>
@@ -61,9 +56,7 @@ const formatStatus = (status = '') =>
         </h2>
 
         <nav className="sidebar-nav">
-          <Link to="/dashboard">
-            Dashboard
-          </Link>
+          <Link to="/dashboard">Dashboard</Link>
 
           <Link to="/products">
             Produtos
@@ -98,65 +91,89 @@ const formatStatus = (status = '') =>
       </aside>
 
       <main className="dashboard-main">
-
-
         <header className="dashboard-header">
           <div>
             <h1>Pedidos</h1>
-
             <p>
-              Gerencie todos os pedidos
-              do sistema
+              Gerencie todos os pedidos do sistema
             </p>
           </div>
         </header>
 
-       <section className="orders-section">
-  {loading ? (
-    <p>Carregando pedidos...</p>
-  ) : (
-    <div className="orders-grid">
-      {orders.map((order) => (
-        <article key={order.id} className="order-card">
-          <div className="order-top">
-            <div>
-              <h3>Pedido #{order.id}</h3>
-              <small>{order.date}</small>
+        <section className="orders-section">
+          {loading ? (
+            <p>Carregando pedidos...</p>
+          ) : orders.length === 0 ? (
+            <p>Nenhum pedido encontrado.</p>
+          ) : (
+            <div className="orders-grid">
+              {orders.map((order) => (
+                <article
+                  key={order.id}
+                  className="order-card"
+                >
+                  <div className="order-top">
+                    <div>
+                      <h3>
+                        Pedido #{order.id}
+                      </h3>
+
+                      <small>
+                        {order.date ||
+                          'Sem data'}
+                      </small>
+                    </div>
+
+                    {order.status && (
+                      <span
+                        className={`status-badge ${formatStatus(
+                          order.status
+                        )}`}
+                      >
+                        {order.status}
+                      </span>
+                    )}
+                  </div>
+
+                  <div className="order-info">
+                    <p>
+                      <strong>
+                        Cliente:
+                      </strong>{' '}
+                      {order.client ||
+                        'Não informado'}
+                    </p>
+
+                    <p>
+                      <strong>
+                        Total:
+                      </strong>{' '}
+                      {formatCurrency(
+                        order.total
+                      )}
+                    </p>
+                  </div>
+
+                  <div className="order-actions">
+                    <Link
+                      to={`/orders/edit/${order.id}`}
+                      className="btn-secondary"
+                    >
+                      Editar
+                    </Link>
+
+                    <Link
+                      to={`/orders/${order.id}`}
+                      className="btn-primary"
+                    >
+                      Ver detalhes
+                    </Link>
+                  </div>
+                </article>
+              ))}
             </div>
-
-            <div className="order-info">
-              <p>
-                <strong>Cliente:</strong>{' '}
-                {order.client || 'Não informado'}
-              </p>
-
-              <p>
-                <strong>Total:</strong>{' '}
-                {formatCurrency(order.total)}
-              </p>
-            </div>
-
-            <div className="order-actions">
-              <Link
-                to={`/orders/edit/${order.id}`}
-                className="btn-secondary"
-              >
-                Editar
-              </Link>
-
-              <Link
-                to={`/orders/${order.id}`}
-                className="btn-primary"
-              >
-                Ver detalhes
-              </Link>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  )}
-</section>
+          )}
+        </section>
       </main>
     </div>
   )
