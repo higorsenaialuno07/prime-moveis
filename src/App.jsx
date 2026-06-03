@@ -11,7 +11,7 @@ import Login from "./pages/Login";
 import EditOrder from "./pages/EditOrder";
 import OrderDetails from "./pages/OrderDetails";
 import Cart from "./pages/Cart";
-
+import ResetPassword from './pages/ResetPassword'
 import Products from "./pages/Products";
 import ProductView from "./pages/ProductView";
 import Catalogo from "./pages/Catalogo";
@@ -44,6 +44,7 @@ function App() {
       />
 
       <Route path="/login" element={<Login />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="/cart" element={<Cart />} />
 
       <Route path="/products" element={<Products />} />

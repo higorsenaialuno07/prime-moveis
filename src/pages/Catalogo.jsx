@@ -2,8 +2,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
-import ThemeContext from '../context/ThemeContext'
-import { useAuth } from '../context/AuthContext'
+import { useThemeContext } from '../context/ThemeContext'
 
 import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
 import tableImage from '../assets/images/table.jpeg'
@@ -16,45 +15,14 @@ import '../styles/pages/catalogo.css'
 
 function Catalogo() {
 
-  const { theme, toggleTheme } =
-  useContext(ThemeContext)
-
   const navigate = useNavigate()
 
-  const { user } = useAuth()
+  const {
+    theme,
+    toggleTheme
+  } = useThemeContext()
 
-  function handleBuy(product) {
-
-  const cart =
-    JSON.parse(localStorage.getItem('cart')) || []
-
-  const existingProduct = cart.find(
-    (item) => item.id === product.id
-  )
-
-  if(existingProduct){
-
-    existingProduct.quantity += 1
-
-  } else {
-
-    cart.push({
-      ...product,
-      quantity: 1
-    })
-  }
-
-  localStorage.setItem(
-    'cart',
-    JSON.stringify(cart)
-  )
-
-  alert('Produto adicionado ao carrinho!')
-
-  navigate('/cart')
-}
   const products = [
-
     {
       id: 1,
       name: 'Sofá Luxury',
@@ -64,7 +32,6 @@ function Catalogo() {
       price: 2599.98,
       image: sofaLuxury
     },
-
     {
       id: 2,
       name: 'Mesa Elegance',
@@ -74,7 +41,6 @@ function Catalogo() {
       price: 771.86,
       image: tableImage
     },
-
     {
       id: 3,
       name: 'Cadeira Premium',
@@ -84,7 +50,6 @@ function Catalogo() {
       price: 1900,
       image: chairImage
     },
-
     {
       id: 4,
       name: 'Poltrona Classic',
@@ -94,7 +59,6 @@ function Catalogo() {
       price: 940.71,
       image: poltronaImage
     },
-
     {
       id: 5,
       name: 'Rack Modern',
@@ -104,7 +68,6 @@ function Catalogo() {
       price: 865.72,
       image: rackImage
     },
-
     {
       id: 6,
       name: 'Mesa Office',
@@ -114,19 +77,58 @@ function Catalogo() {
       price: 572.55,
       image: officeImage
     }
-
   ]
+
+  function handleBuy(product) {
+
+    const cart =
+      JSON.parse(localStorage.getItem('cart')) || []
+
+    const existingProduct = cart.find(
+      item => item.id === product.id
+    )
+
+    if (existingProduct) {
+
+      existingProduct.quantity += 1
+
+    } else {
+
+      cart.push({
+        ...product,
+        quantity: 1
+      })
+
+    }
+
+    localStorage.setItem(
+      'cart',
+      JSON.stringify(cart)
+    )
+
+    alert('Produto adicionado ao carrinho!')
+
+    navigate('/cart')
+  }
 
   return (
 
-    <div className="catalog-page">
+    <div className={`catalog-page ${theme}`}>
 
       <Navbar />
 
-      {/* HERO */}
       <section className="catalog-hero">
 
         <div className="catalog-overlay">
+
+          <button
+            className="theme-toggle"
+            onClick={toggleTheme}
+          >
+            {theme === 'light'
+              ? '🌙'
+              : '☀️'}
+          </button>
 
           <span className="catalog-badge">
             Catálogo Oficial
@@ -164,7 +166,6 @@ function Catalogo() {
 
       </section>
 
-      {/* INFO */}
       <section className="catalog-info">
 
         <div className="info-card">
@@ -189,7 +190,6 @@ function Catalogo() {
 
       </section>
 
-      {/* PRODUCTS */}
       <section
         className="catalog-products"
         id="catalog-products"
@@ -214,7 +214,7 @@ function Catalogo() {
 
         <div className="catalog-grid">
 
-          {products.map((product) => (
+          {products.map(product => (
 
             <div
               key={product.id}
@@ -247,7 +247,13 @@ function Catalogo() {
                 <div className="catalog-footer">
 
                   <span className="catalog-price">
-                    {product.price}
+                    {product.price.toLocaleString(
+                      'pt-BR',
+                      {
+                        style: 'currency',
+                        currency: 'BRL'
+                      }
+                    )}
                   </span>
 
                   <button
@@ -269,7 +275,6 @@ function Catalogo() {
 
       </section>
 
-      {/* CTA */}
       <section className="catalog-cta">
 
         <div className="cta-content">

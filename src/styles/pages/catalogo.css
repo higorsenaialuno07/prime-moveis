@@ -536,3 +536,36 @@ body.dark .theme-toggle{
   background:#1e293b;
   color:white;
 }
+
+.theme-toggle{
+  position:absolute;
+  top:20px;
+  right:20px;
+
+  width:48px;
+  height:48px;
+
+  border:none;
+  border-radius:50%;
+
+  cursor:pointer;
+
+  font-size:1.2rem;
+
+  background:white;
+
+  transition:.3s;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.1);
+}
+
+body.dark .theme-toggle{
+  background:#1e293b;
+  color:white;
+}
+
+.catalog-overlay{
+  position:relative;
+}

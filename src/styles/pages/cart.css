@@ -421,3 +421,27 @@ body.dark .empty-cart p{
   }
 
 }
+
+select{
+  width:100%;
+  padding:12px 16px;
+
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+
+  background:white;
+  color:#0f172a;
+
+  font-size:1rem;
+}
+
+select:focus{
+  outline:none;
+  border-color:#2563eb;
+}
+
+body.dark select{
+  background:#0f172a;
+  color:white;
+  border:1px solid #334155;
+}
