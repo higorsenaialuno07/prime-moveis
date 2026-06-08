@@ -28,58 +28,43 @@ function Login() {
     useState(false)
 
   async function handleSubmit(e) {
+  e.preventDefault()
 
-    e.preventDefault()
+  setLoading(true)
 
-    setLoading(true)
+  try {
+    let result
 
-    try {
+    if (isRegister) {
+      result = await signUp(email, password)
 
-      let error
+      console.log('CADASTRO:', result)
 
-      if (isRegister) {
-
-        ({ error } =
-          await signUp(email, password))
-
-        if (!error) {
-
-          alert(
-            'Conta criada com sucesso!'
-          )
-
-        }
-
-      } else {
-
-        ({ error } =
-          await signIn(email, password))
-
-        if (!error) {
-
-          navigate('/dashboard')
-
-        }
-
+      if (!result.error) {
+        alert('Conta criada com sucesso!')
+        setIsRegister(false)
       }
+    } else {
+      result = await signIn(email, password)
 
-      if (error) {
+      console.log('LOGIN:', result)
 
-        alert(error.message)
-
+      if (!result.error) {
+        navigate('/dashboard')
       }
-
-    } catch {
-
-      alert('Erro inesperado.')
-
-    } finally {
-
-      setLoading(false)
-
     }
 
+    if (result.error) {
+      alert(result.error.message)
+    }
+
+  } catch (error) {
+    console.error(error)
+    alert(error.message || 'Erro inesperado.')
+  } finally {
+    setLoading(false)
   }
+}
 
   async function handleForgotPassword() {
 
@@ -246,6 +231,9 @@ function Login() {
 
   )
 
+
+
+  
 }
 
 export default Login
