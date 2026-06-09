@@ -3,10 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
-import heroImage from '../assets/images/Cama.jpeg'
-import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
-import tableImage from '../assets/images/table.jpeg'
-import chairImage from '../assets/images/cadeira-premium.jpeg'
+import heroImage from '../assets/images/Cama.webp'
+import sofaLuxury from '../assets/images/sofa-luxury.webp'
+import tableImage from '../assets/images/table.webp'
+import chairImage from "../assets/images/cadeira-premium.webp";
 
 function Home() {
   const navigate = useNavigate()

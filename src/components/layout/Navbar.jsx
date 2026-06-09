@@ -30,6 +30,8 @@ function Navbar() {
         <Link to="/home">Home</Link>
         <Link to="/products">Produtos</Link>
         <Link to="/cart">Carrinho</Link>
+        <Link to="/catalogo">Catálogo</Link>
+        <Link to="/about">Sobre</Link>
       </nav>
 
       <div className="navbar-actions">

@@ -4,12 +4,12 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import { useThemeContext } from '../context/ThemeContext'
 
-import sofaLuxury from '../assets/images/sofa-luxury.jpeg'
-import tableImage from '../assets/images/table.jpeg'
-import chairImage from '../assets/images/cadeira-premium.jpeg'
-import poltronaImage from '../assets/images/poltrona-classic.jpeg'
-import rackImage from '../assets/images/rack.jpeg'
-import officeImage from '../assets/images/mesa-office.jpeg'
+import sofaLuxury from '../assets/images/sofa-luxury.webp'
+import tableImage from '../assets/images/table.webp'
+import chairImage from '../assets/images/cadeira-premium.webp'
+import poltronaImage from '../assets/images/poltrona-classic.webp'
+import rackImage from '../assets/images/rack.webp'
+import officeImage from '../assets/images/mesa-office.webp'
 
 import '../styles/pages/catalogo.css'
 
