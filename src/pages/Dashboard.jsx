@@ -11,9 +11,10 @@ function Dashboard() {
 
 useEffect(() => {
   const loadOrders = async () => {
+    // Garantimos que 'client' (em inglês) seja buscado, combinando com o banco
     const { data, error } = await supabase
       .from('orders')
-      .select('id, cliente, total, status')
+      .select('id, client, total, status')
 
     if (error) {
       console.log('Erro ao carregar pedidos:', error)
@@ -119,30 +120,39 @@ useEffect(() => {
             </thead>
 
             <tbody>
-              {orders.map((order) => (
-                <tr key={order.id}>
-                  <td>{order.cliente}</td>
+  {orders.length === 0 ? (
+    <tr>
+      <td colSpan="4" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+        Nenhum pedido recente encontrado.
+      </td>
+    </tr>
+  ) : (
+    orders.map((order) => (
+      <tr key={order.id}>
+        {/* Mudado de order.cliente para order.client */}
+        <td>{order.client || 'Não informado'}</td>
 
-                  <td>Pedido Finalizado</td>
+        <td>Pedido Finalizado</td>
 
-                  <td>
-                    R$ {(Number(order.total) || 0).toFixed(2)}
-                  </td>
+        <td>
+          R$ {(Number(order.total) || 0).toFixed(2)}
+        </td>
 
-                  <td>
-                    <span
-                      className={`status ${
-                        order.status?.toLowerCase() === 'pendente'
-                          ? 'pending'
-                          : 'delivered'
-                      }`}
-                    >
-                      {order.status}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+        <td>
+          <span
+            className={`status ${
+              order.status?.toLowerCase() === 'pendente'
+                ? 'pending'
+                : 'delivered'
+            }`}
+          >
+            {order.status}
+          </span>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
           </table>
 
         </section>

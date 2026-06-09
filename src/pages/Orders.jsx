@@ -8,44 +8,32 @@ import { supabase } from '../services/supabase'
 import '../styles/pages/orders.css'
 
 function Orders() {
-
   const { theme } = useThemeContext()
-
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
 
+  // Apenas UM useEffect é necessário aqui!
   useEffect(() => {
+    async function fetchOrders() {
+      try {
+        const { data, error } = await supabase
+          .from('orders')
+          .select('*')
+          .order('created_at', { ascending: false })
 
-  async function fetchOrders() {
-
-    try {
-
-      const { data, error } = await supabase
-        .from('orders')
-        .select('*')
-        .order('created_at', {
-          ascending: false
-        })
-
-      if (error) throw error
-
-      setOrders(data || [])
-
-    } catch (error) {
-
-      console.error(error)
-
-    } finally {
-
-      setLoading(false)
-
+        if (error) throw error
+        setOrders(data || [])
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
     }
 
-  }
+    fetchOrders()
+  }, [])
 
-  fetchOrders()
-
-}, [])
+  const formatStatus = (status = '') => // ... resto do seu código
 useEffect(() => {
 
   async function fetchOrders() {
