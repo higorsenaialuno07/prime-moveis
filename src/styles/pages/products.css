@@ -158,8 +158,10 @@
 /* GRID */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  /* Trocar auto-fit por auto-fill evita que um único card tente expandir loucamente */
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 35px;
+  justify-content: center; /* Centraliza o card bonito na tela se estiver sozinho */
 }
 
 /* CARD */
@@ -170,6 +172,11 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
   transition: 0.4s;
+  
+  /* Garante um teto de largura para o card não virar um banner horizontal */
+  max-width: 450px; 
+  width: 100%;
+  margin: 0 auto; /* Auxilia na centralização */
 }
 
 .product-card:hover {
