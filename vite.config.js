@@ -8,4 +8,9 @@ export default defineConfig({
     react(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  build: {
+    // Evita que o CSS bloqueie a renderização inicial da página
+    cssCodeSplit: false,
+    assetsInlineLimit: 4096 // Coloca pequenos assets e fontes inline, se necessário
+  }
 })
