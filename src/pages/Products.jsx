@@ -115,107 +115,112 @@ function Products() {
     <div className="products-page">
       <Navbar />
 
-      {/* HERO OTIMIZADO DINAMICAMENTE (RESOLVE O PROBLEMA DE REDE DO LCP) */}
-      <section className="products-hero">
-        {/* Passamos parâmetros para o Unsplash comprimir, redimensionar e converter para WebP */}
-        <img 
-          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=75&w=1200&auto=format&fit=crop&blur=0&fm=webp" 
-          alt="Ambiente Prime Móveis" 
-          className="hero-bg-image"
-          fetchpriority="high"
-          loading="eager"
-        />
-        
-        <div className="hero-overlay"></div>
+      {/* PASSO 2: Tag <main> adicionada para criar o ponto de referência principal */}
+      <main id="main-content">
 
-        <div className="products-hero-content">
-          <span className="products-badge">
-            Catálogo Premium
-          </span>
+        {/* HERO OTIMIZADO DINAMICAMENTE */}
+        <section className="products-hero">
+          <img 
+            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=75&w=1200&auto=format&fit=crop&blur=0&fm=webp" 
+            alt="Ambiente residencial decorado com móveis premium da Prime Móveis" 
+            className="hero-bg-image"
+            fetchpriority="high"
+            loading="eager"
+          />
+          
+          <div className="hero-overlay"></div>
 
-          <h1>
-            Explore nossa coleção de móveis
-          </h1>
+          <div className="products-hero-content">
+            <span className="products-badge">
+              Catálogo Premium
+            </span>
 
-          <p>
-            Produtos modernos, sofisticados e
-            desenvolvidos para transformar ambientes.
-          </p>
+            <h1>
+              Explore nossa coleção de móveis
+            </h1>
 
-          <Link
-            to="/dashboard"
-            className="dashboard-btn"
-          >
-            Ir para Dashboard
-          </Link>
-        </div>
-      </section>
+            <p>
+              Produtos modernos, sofisticados e
+              desenvolvidos para transformar ambientes.
+            </p>
 
-      {/* PRODUTOS */}
-      <section className="products-section">
-        <div className="products-top">
-          <h2>
-            Todos os Produtos
-          </h2>
-
-          <p>
-            {filteredProducts.length} produtos encontrados
-          </p>
-        </div>
-
-        <ProductFilter
-          search={search}
-          setSearch={setSearch}
-          category={category}
-          setCategory={setCategory}
-          sort={sort}
-          setSort={setSort}
-        />
-
-        <div className="products-grid">
-          {filteredProducts.map((product, index) => (
-            <div
-              key={product.id}
-              className="product-card"
+            <Link
+              to="/dashboard"
+              className="dashboard-btn"
             >
-              <div className="product-image">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  loading={index >= 2 ? "lazy" : "eager"}
-                  width="350"
-                  height="260"
-                />
-              </div>
+              Ir para Dashboard
+            </Link>
+          </div>
+        </section>
 
-              <div className="product-content">
-                <h3>
-                  {product.name}
-                </h3>
+        {/* PRODUTOS */}
+        <section className="products-section">
+          <div className="products-top">
+            <h2>
+              Todos os Produtos
+            </h2>
 
-                <p className="product-description">
-                  {product.description}
-                </p>
+            <p>
+              {filteredProducts.length} produtos encontrados
+            </p>
+          </div>
 
-                <div className="product-footer">
-                  <div className="product-price">
-                    <span className="current-price">
-                      R$ {product.price.toFixed(2)}
-                    </span>
+          <ProductFilter
+            search={search}
+            setSearch={setSearch}
+            category={category}
+            setCategory={setCategory}
+            sort={sort}
+            setSort={setSort}
+          />
+
+          <div className="products-grid">
+            {filteredProducts.map((product, index) => (
+              <div
+                key={product.id}
+                className="product-card"
+              >
+                <div className="product-image">
+                  <img
+                    src={product.image}
+                    alt={`Foto descritiva do produto ${product.name}`}
+                    loading={index >= 2 ? "lazy" : "eager"}
+                    width="350"
+                    height="260"
+                  />
+                </div>
+
+                <div className="product-content">
+                  <h3>
+                    {product.name}
+                  </h3>
+
+                  <p className="product-description">
+                    {product.description}
+                  </p>
+
+                  <div className="product-footer">
+                    <div className="product-price">
+                      <span className="current-price">
+                        R$ {product.price.toFixed(2)}
+                      </span>
+                    </div>
+
+                    <button
+                      className="product-btn"
+                      onClick={() => handleBuy(product)}
+                      aria-label={`Adicionar ${product.name} ao seu carrinho`}
+                    >
+                      Comprar
+                    </button>
                   </div>
-
-                  <button
-                    className="product-btn"
-                    onClick={() => handleBuy(product)}
-                  >
-                    Comprar
-                  </button>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+
+      </main>
 
       <Footer />
     </div>

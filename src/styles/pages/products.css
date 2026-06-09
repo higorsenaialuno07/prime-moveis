@@ -186,9 +186,9 @@
 
 .product-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.5s;
+  height: 260px;       /* Mantém a altura fixa idêntica ao atributo HTML */
+  object-fit: cover;   /* Faz a imagem se adaptar perfeitamente sem distorcer */
+  image-rendering: -webkit-optimize-contrast; /* Truque extra para nitidez */
 }
 
 .product-card:hover img {
