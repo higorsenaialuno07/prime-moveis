@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom' // Removido o useNavigate que quebrava o build
 
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
@@ -13,8 +13,6 @@ import rackImage from '../assets/images/rack.jpeg'
 import officeImage from '../assets/images/mesa-office.jpeg'
 
 function Products() {
-  const navigate = useNavigate()
-
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('all')
   const [sort, setSort] = useState('low')
@@ -42,7 +40,6 @@ function Products() {
     )
 
     alert('Produto adicionado ao carrinho!')
-    navigate('/cart')
   }
 
   const products = [
@@ -118,18 +115,17 @@ function Products() {
     <div className="products-page">
       <Navbar />
 
-      {/* HERO OTIMIZADO PARA PERFORMANCE (MELHORA O LCP) */}
+      {/* HERO OTIMIZADO DINAMICAMENTE (RESOLVE O PROBLEMA DE REDE DO LCP) */}
       <section className="products-hero">
-        {/* A imagem principal agora carrega direto no HTML com prioridade máxima */}
+        {/* Passamos parâmetros para o Unsplash comprimir, redimensionar e converter para WebP */}
         <img 
-          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" 
+          src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=75&w=1200&auto=format&fit=crop&blur=0&fm=webp" 
           alt="Ambiente Prime Móveis" 
           className="hero-bg-image"
           fetchpriority="high"
           loading="eager"
         />
         
-        {/* Camada para o degradê escuro */}
         <div className="hero-overlay"></div>
 
         <div className="products-hero-content">
@@ -167,7 +163,6 @@ function Products() {
           </p>
         </div>
 
-        {/* FILTRO */}
         <ProductFilter
           search={search}
           setSearch={setSearch}
@@ -177,7 +172,6 @@ function Products() {
           setSort={setSort}
         />
 
-        {/* GRID DE PRODUTOS */}
         <div className="products-grid">
           {filteredProducts.map((product, index) => (
             <div
@@ -185,9 +179,6 @@ function Products() {
               className="product-card"
             >
               <div className="product-image">
-                {/* Otimização extra: Os primeiros 2 produtos usam "eager" (carregam na hora), 
-                  do terceiro em diante usam "lazy" para poupar performance.
-                */}
                 <img
                   src={product.image}
                   alt={product.name}
