@@ -1,4 +1,6 @@
-/* LIGHT MODE */
+/* ==========================================================================
+   1. LIGHT MODE (PADRÃO)
+   ========================================================================== */
 
 .products-page {
   min-height: 100vh;
@@ -15,12 +17,11 @@
   text-align: center;
   padding: 0 7%;
   position: relative;
-  overflow: hidden; /* Evita que a tag img saia do bloco */
+  overflow: hidden;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: #020621; /* Cor escura sólida enquanto a imagem não carrega */
+  background: #020621;
 }
 
-/* Tag img injetada direto pelo HTML */
 .hero-bg-image {
   position: absolute;
   top: 0;
@@ -32,7 +33,6 @@
   z-index: 1;
 }
 
-/* Camada separada para manter o gradiente escuro exatamente igual ao original */
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -60,7 +60,7 @@
   max-width: 850px;
   color: white;
   position: relative;
-  z-index: 10; /* Texto e botões sempre na camada do topo */
+  z-index: 10;
 }
 
 .products-badge {
@@ -111,9 +111,10 @@
   color: #0f172a;
 }
 
+/* Corrigido Contraste no Light Mode */
 .products-top p {
   color: #475569 !important; 
-  font-weight: 500;
+  font-weight: 600;
   margin-top: 10px;
 }
 
@@ -146,25 +147,20 @@
 }
 
 .products-filter button.active {
-  background: linear-gradient(
-    135deg,
-    #38bdf8,
-    #2563eb
-  );
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
   border: none;
 }
 
-/* GRID */
+/* GRID CONTROLLERS */
 .products-grid {
   display: grid;
-  /* Trocar auto-fit por auto-fill evita que um único card tente expandir loucamente */
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: 35px;
-  justify-content: center; /* Centraliza o card bonito na tela se estiver sozinho */
+  justify-content: center; /* Centraliza o card remanescente da busca */
 }
 
-/* CARD */
+/* CARD - Travado para não virar banner horizontal */
 .product-card {
   background: #111827;
   border-radius: 28px;
@@ -172,11 +168,11 @@
   border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.45);
   transition: 0.4s;
-  
-  /* Garante um teto de largura para o card não virar um banner horizontal */
-  max-width: 450px; 
+  max-width: 360px;
   width: 100%;
-  margin: 0 auto; /* Auxilia na centralização */
+  margin: 0 auto; /* Auxilia a centralização no grid */
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -185,27 +181,37 @@
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6);
 }
 
-/* IMAGE */
+/* IMAGE WRAPPER */
 .product-image {
   height: 260px;
+  width: 100%;
   overflow: hidden;
   background: #0b1120;
+  position: relative;
 }
 
-.product-image img {
+/* Forçado a imagem a respeitar a largura interna sem esticar na busca */
+.product-image img.product-card-img {
   width: 100%;
-  height: 260px;       /* Mantém a altura fixa idêntica ao atributo HTML */
-  object-fit: cover;   /* Faz a imagem se adaptar perfeitamente sem distorcer */
-  image-rendering: -webkit-optimize-contrast; /* Truque extra para nitidez */
+  max-width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.4s ease;
 }
 
-.product-card:hover img {
+.product-card:hover img.product-card-img {
   transform: scale(1.08);
 }
 
 /* CONTENT */
 .product-content {
   padding: 28px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-content h3 {
@@ -214,10 +220,12 @@
   margin-bottom: 14px;
 }
 
+/* Contraste perfeito sobre o fundo escuro do Card */
 .product-description {
-  color: #e2e8f0 !important; /* Um cinza bem claro/quase branco que dá contraste perfeito no card escuro */
+  color: #cbd5e1 !important; 
   line-height: 1.8;
   margin-bottom: 28px;
+  flex-grow: 1;
 }
 
 /* FOOTER */
@@ -226,6 +234,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
+  margin-top: auto;
 }
 
 .product-price {
@@ -244,11 +253,7 @@
   border: none;
   padding: 14px 28px;
   border-radius: 16px;
-  background: linear-gradient(
-    135deg,
-    #38bdf8,
-    #2563eb
-  );
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
   font-weight: 700;
   cursor: pointer;
@@ -282,7 +287,10 @@
   font-size: 1rem;
 }
 
-/* RESPONSIVO */
+/* ==========================================================================
+   2. RESPONSIVIDADE
+   ========================================================================== */
+
 @media(max-width:1000px){
   .products-hero h1 {
     font-size: 4rem;
@@ -330,9 +338,9 @@
   }
 }
 
-/* =========================
-   DARK MODE PRODUCTS
-========================= */
+/* ==========================================================================
+   3. DARK MODE PRODUCTS
+   ========================================================================== */
 
 body.dark .products-page {
   background: linear-gradient(
@@ -344,7 +352,6 @@ body.dark .products-page {
   color: white;
 }
 
-/* HERO - DARK MODE (Limpo e rápido) */
 body.dark .products-hero {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   background: #010414;
@@ -364,16 +371,15 @@ body.dark .products-hero p {
   color: #cbd5e1;
 }
 
-/* TOP */
 body.dark .products-top h2 {
   color: white;
 }
 
+/* Retorna a cor suave no Tema Escuro */
 body.dark .products-top p {
   color: #94a3b8 !important;
 }
 
-/* FILTER */
 body.dark .products-filter button {
   background: #111827;
   color: #cbd5e1;
@@ -387,15 +393,10 @@ body.dark .products-filter button:hover {
 }
 
 body.dark .products-filter button.active {
-  background: linear-gradient(
-    135deg,
-    #38bdf8,
-    #2563eb
-  );
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
 }
 
-/* CARD */
 body.dark .product-card {
   background: #111827;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -407,12 +408,10 @@ body.dark .product-card:hover {
   box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6);
 }
 
-/* IMAGE */
 body.dark .product-image {
   background: #0b1120;
 }
 
-/* CONTENT */
 body.dark .product-content h3 {
   color: white;
 }
@@ -421,18 +420,12 @@ body.dark .product-description {
   color: #94a3b8 !important;
 }
 
-/* PRICE */
 body.dark .current-price {
   color: #38bdf8;
 }
 
-/* BUTTON */
 body.dark .product-btn {
-  background: linear-gradient(
-    135deg,
-    #38bdf8,
-    #2563eb
-  );
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
   color: white;
 }
 
@@ -440,7 +433,6 @@ body.dark .product-btn:hover {
   box-shadow: 0 15px 30px rgba(56, 189, 248, 0.35);
 }
 
-/* EMPTY */
 body.dark .empty-products {
   background: #111827;
   border: 1px solid rgba(255, 255, 255, 0.06);
