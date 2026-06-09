@@ -6,7 +6,7 @@ import Footer from '../components/layout/Footer'
 import heroImage from '../assets/images/Cama.webp'
 import sofaLuxury from '../assets/images/sofa-luxury.webp'
 import tableImage from '../assets/images/table.webp'
-import chairImage from "../assets/images/cadeira-premium.webp";
+import chairImage from "../assets/images/cadeira-premium.webp"
 
 function Home() {
   const navigate = useNavigate()
@@ -62,116 +62,104 @@ function Home() {
 
   return (
     <div className="home-page">
-
       <Navbar />
 
-      {/* HERO */}
-      <section className="hero">
+      {/* Tag <main> adicionada para estruturar os pontos de referência de SEO/Acessibilidade */}
+      <main id="main-content">
 
-        <div className="hero-content">
-
-          <span className="hero-badge">
-            Móveis Premium
-          </span>
-
-          <h1>
-            Transforme sua casa com móveis modernos e elegantes
-          </h1>
-
-          <p>
-            Descubra coleções sofisticadas para sala,
-            quarto, cozinha e escritório com design contemporâneo.
-          </p>
-
-          <div className="hero-buttons">
-
-            <Link to="/products" className="primary-btn">
-              Explorar Produtos
-            </Link>
-
-            <Link to="/catalogo" className="secondary-btn">
-              Ver Catálogo
-            </Link>
-
+        {/* HERO - Imagem otimizada para carregar imediatamente (eager) */}
+        <section className="hero">
+          <div className="hero-content">
+            <span className="hero-badge">Móveis Premium</span>
+            <h1>Transforme sua casa com móveis modernos e elegantes</h1>
+            <p>
+              Descubra coleções sofisticadas para sala, quarto, cozinha e escritório com design contemporâneo.
+            </p>
+            <div className="hero-buttons">
+              <Link to="/products" className="primary-btn">Explorar Produtos</Link>
+              <Link to="/catalogo" className="secondary-btn">Ver Catálogo</Link>
+            </div>
           </div>
 
-        </div>
+          <div className="hero-image">
+            <img 
+              src={heroImage} 
+              alt="Ambiente residencial aconchegante exibindo uma cama moderna e decorada" 
+              loading="eager"
+              fetchpriority="high"
+              width="600"
+              height="450"
+            />
+          </div>
+        </section>
 
-        <div className="hero-image">
-          <img src={heroImage} alt="Móveis" />
-        </div>
+        {/* CATEGORIES */}
+        <section className="categories">
+          <div className="section-title">
+            <h2>Categorias</h2>
+          </div>
 
-      </section>
+          <div className="categories-grid">
+            <div className="category-card"><h3>Sofás</h3></div>
+            <div className="category-card"><h3>Mesas</h3></div>
+            <div className="category-card"><h3>Cadeiras</h3></div>
+            <div className="category-card"><h3>Armários</h3></div>
+          </div>
+        </section>
 
-      {/* CATEGORIES */}
-      <section className="categories">
+        {/* PRODUCTS */}
+        <section className="featured-products">
+          <div className="section-title">
+            <h2>Produtos em Destaque</h2>
+          </div>
 
-        <div className="section-title">
-          <h2>Categorias</h2>
-        </div>
+          <div className="products-grid">
+            {products.map((product) => (
+              <div key={product.id} className="product-card">
+                
+                {/* Imagem com dimensões estáticas para evitar saltos de layout */}
+                <div className="product-image">
+                  <img 
+                    src={product.image} 
+                    alt={`Foto descritiva do produto ${product.name}`} 
+                    loading="lazy"
+                    width="350"
+                    height="260"
+                    className="product-card-img"
+                  />
+                </div>
 
-        <div className="categories-grid">
-          <div className="category-card"><h3>Sofás</h3></div>
-          <div className="category-card"><h3>Mesas</h3></div>
-          <div className="category-card"><h3>Cadeiras</h3></div>
-          <div className="category-card"><h3>Armários</h3></div>
-        </div>
+                <div className="product-content">
+                  <h3>{product.name}</h3>
+                  <p className="product-description">{product.description}</p>
 
-      </section>
+                  <div className="product-footer">
+                    <span className="current-price">
+                      {product.price.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                      })}
+                    </span>
 
-      {/* PRODUCTS */}
-      <section className="featured-products">
-
-        <div className="section-title">
-          <h2>Produtos em Destaque</h2>
-        </div>
-
-        <div className="products-grid">
-
-          {products.map((product) => (
-            <div key={product.id} className="product-card">
-
-              <div className="product-image">
-                <img src={product.image} alt={product.name} />
-              </div>
-
-              <div className="product-content">
-
-                <h3>{product.name}</h3>
-
-                <p className="product-description">
-                  {product.description}
-                </p>
-
-                <div className="product-footer">
-
-                  <span className="current-price">
-                    {product.price.toLocaleString('pt-BR', {
-                      style: 'currency',
-                      currency: 'BRL'
-                    })}
-                  </span>
-
-                  <button
-                    className="product-btn"
-                    onClick={() => handleBuy(product)}
-                  >
-                    Comprar
-                  </button>
-
+                    {/* Botão com acessibilidade para leitores de tela */}
+                    <button
+                      className="product-btn"
+                      onClick={() => handleBuy(product)}
+                      aria-label={`Comprar ${product.name} agora`}
+                    >
+                      Comprar
+                    </button>
+                  </div>
                 </div>
 
               </div>
-
-            </div>
-          ))}
-
-        </div>
-
-      </section>
+            ))}
+          </div>
+        </section>
+        
+      </main>
 
       <Footer />
-
     </div>
   )
 }
