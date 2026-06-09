@@ -208,7 +208,7 @@
 }
 
 .product-description {
-  color: #475569; /* Cinza escuro para passar no validador se o card for claro */
+  color: #e2e8f0 !important; /* Um cinza bem claro/quase branco que dá contraste perfeito no card escuro */
   line-height: 1.8;
   margin-bottom: 28px;
 }
