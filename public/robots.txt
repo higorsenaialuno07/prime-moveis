@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Link para o seu mapa do site (opcional, caso você tenha um sitemap.xml)
-# Sitemap: https://seu-dominio.vercel.app/sitemap.xml
+# Sitemap: https://prime-moveis-gilt.vercel.app/
