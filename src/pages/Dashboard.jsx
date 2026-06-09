@@ -5,27 +5,27 @@ import { Link } from 'react-router-dom'
 
 function Dashboard() {
   const { user, signOut } = useAuth()
-
+  
+  // O estado começa obrigatoriamente como um array vazio
   const [orders, setOrders] = useState([])
 
+  useEffect(() => {
+    const loadOrders = async () => {
+      // Mudamos para '*' para trazer todas as colunas liberadas pela nova Policy
+      const { data, error } = await supabase
+        .from('orders')
+        .select('*')
 
-useEffect(() => {
-  const loadOrders = async () => {
-    // Garantimos que 'client' (em inglês) seja buscado, combinando com o banco
-    const { data, error } = await supabase
-      .from('orders')
-      .select('id, client, total, status')
+      if (error) {
+        console.log('Erro ao carregar pedidos:', error)
+        return
+      }
 
-    if (error) {
-      console.log('Erro ao carregar pedidos:', error)
-      return
+      setOrders(data || [])
     }
 
-    setOrders(data || [])
-  }
-
-  loadOrders()
-}, [])
+    loadOrders()
+  }, [])
 
   async function handleLogout() {
     await signOut()
@@ -36,10 +36,8 @@ useEffect(() => {
 
       {/* SIDEBAR */}
       <aside className="sidebar">
-
         <div>
           <h2 className="sidebar-logo">Prime Móveis</h2>
-
           <nav className="sidebar-nav">
             <Link to="/dashboard">Dashboard</Link>
             <Link to="/products">Produtos</Link>
@@ -53,7 +51,6 @@ useEffect(() => {
         <button className="logout-btn" onClick={handleLogout}>
           Sair
         </button>
-
       </aside>
 
       {/* CONTENT */}
@@ -61,7 +58,6 @@ useEffect(() => {
 
         {/* HEADER */}
         <header className="dashboard-header">
-
           <div>
             <h1>Painel Administrativo</h1>
             <p>Bem-vindo, {user?.email}</p>
@@ -70,12 +66,10 @@ useEffect(() => {
           <div className="dashboard-profile">
             <div className="profile-avatar">P</div>
           </div>
-
         </header>
 
         {/* STATS */}
         <section className="stats-grid">
-
           <div className="stat-card">
             <span>Total de Vendas</span>
             <h2>R$ 25.430</h2>
@@ -84,7 +78,8 @@ useEffect(() => {
 
           <div className="stat-card">
             <span>Pedidos</span>
-            <h2>{orders.length}</h2>
+            {/* Adicionada a interrogação de segurança para não quebrar no milissegundo de carregamento */}
+            <h2>{orders?.length || 0}</h2>
             <p>Pedidos realizados</p>
           </div>
 
@@ -99,12 +94,10 @@ useEffect(() => {
             <h2>48</h2>
             <p>5 novos produtos</p>
           </div>
-
         </section>
 
         {/* TABLE */}
         <section className="dashboard-table">
-
           <div className="table-header">
             <h2>Pedidos Recentes</h2>
           </div>
@@ -120,41 +113,40 @@ useEffect(() => {
             </thead>
 
             <tbody>
-  {orders.length === 0 ? (
-    <tr>
-      <td colSpan="4" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
-        Nenhum pedido recente encontrado.
-      </td>
-    </tr>
-  ) : (
-    orders.map((order) => (
-      <tr key={order.id}>
-        {/* Mudado de order.cliente para order.client */}
-        <td>{order.client || 'Não informado'}</td>
+              {(!orders || orders.length === 0) ? (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: 'center', padding: '20px', color: '#666' }}>
+                    Nenhum pedido recente encontrado.
+                  </td>
+                </tr>
+              ) : (
+                orders.map((order) => (
+                  <tr key={order.id}>
+                    {/* Aceita tanto 'client' em inglês quanto 'cliente' em português caso mude */}
+                    <td>{order.client || order.cliente || 'Não informado'}</td>
 
-        <td>Pedido Finalizado</td>
+                    <td>Pedido Finalizado</td>
 
-        <td>
-          R$ {(Number(order.total) || 0).toFixed(2)}
-        </td>
+                    <td>
+                      R$ {(Number(order.total) || Number(order.valor) || 0).toFixed(2)}
+                    </td>
 
-        <td>
-          <span
-            className={`status ${
-              order.status?.toLowerCase() === 'pendente'
-                ? 'pending'
-                : 'delivered'
-            }`}
-          >
-            {order.status}
-          </span>
-        </td>
-      </tr>
-    ))
-  )}
-</tbody>
+                    <td>
+                      <span
+                        className={`status ${
+                          order.status?.toLowerCase() === 'pendente'
+                            ? 'pending'
+                            : 'delivered'
+                        }`}
+                      >
+                        {order.status || 'Finalizado'}
+                      </span>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
           </table>
-
         </section>
 
       </main>
