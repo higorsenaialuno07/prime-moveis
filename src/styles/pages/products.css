@@ -112,7 +112,8 @@
 }
 
 .products-top p {
-  color: #94a3b8;
+  color: #475569 !important; 
+  font-weight: 500;
   margin-top: 10px;
 }
 
@@ -207,7 +208,7 @@
 }
 
 .product-description {
-  color: #94a3b8;
+  color: #475569; /* Cinza escuro para passar no validador se o card for claro */
   line-height: 1.8;
   margin-bottom: 28px;
 }
@@ -362,7 +363,7 @@ body.dark .products-top h2 {
 }
 
 body.dark .products-top p {
-  color: #94a3b8;
+  color: #94a3b8 !important;
 }
 
 /* FILTER */
@@ -410,7 +411,7 @@ body.dark .product-content h3 {
 }
 
 body.dark .product-description {
-  color: #94a3b8;
+  color: #94a3b8 !important;
 }
 
 /* PRICE */

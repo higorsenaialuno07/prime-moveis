@@ -9,8 +9,17 @@ export default defineConfig({
     babel({ presets: [reactCompilerPreset()] })
   ],
   build: {
-    // Evita que o CSS bloqueie a renderização inicial da página
     cssCodeSplit: false,
-    assetsInlineLimit: 4096 // Coloca pequenos assets e fontes inline, se necessário
+    assetsInlineLimit: 4096,
+    rollupOptions: {
+      output: {
+        // Separa as dependências do node_modules em um arquivo isolado (reduz caminho crítico)
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        }
+      }
+    }
   }
 })
