@@ -118,10 +118,10 @@ function Products() {
       {/* PASSO 2: Tag <main> adicionada para criar o ponto de referência principal */}
       <main id="main-content">
 
-        {/* HERO OTIMIZADO DINAMICAMENTE */}
+        {/* HERO ULTRA OTIMIZADO (Ajustado q=50 e w=800 para zerar a pendência de KiB do Unsplash) */}
         <section className="products-hero">
           <img 
-            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=75&w=1200&auto=format&fit=crop&blur=0&fm=webp" 
+            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=50&w=800&auto=format&fit=crop&fm=webp" 
             alt="Ambiente residencial decorado com móveis premium da Prime Móveis" 
             className="hero-bg-image"
             fetchpriority="high"
