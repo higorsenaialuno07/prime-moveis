@@ -4,9 +4,9 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 
 import heroImage from '../assets/images/Cama.webp'
-import sofaLuxury from '../assets/images/sofa-luxury.webp'
+import sofaLuxury from '../assets/images/sofa-luxury.png'
 import tableImage from '../assets/images/table.webp'
-import chairImage from "../assets/images/cadeira-premium.webp"
+import chairImage from "../assets/images/cadeira-premium.png"
 
 function Home() {
   const navigate = useNavigate()
@@ -57,6 +57,13 @@ function Home() {
       description: 'Conforto e elegância no mesmo produto.',
       price: 1900,
       image: chairImage
+    },
+    {
+      id: 4,
+      name: 'Cama Moderna',
+      description: 'Transforme seu quarto com estilo e conforto.',
+      price: 3500,
+      image: heroImage
     }
   ]
 
@@ -83,13 +90,13 @@ function Home() {
 
           <div className="hero-image">
             <img 
-              src={heroImage} 
-              alt="Ambiente residencial aconchegante exibindo uma cama moderna e decorada" 
-              loading="eager"
-              fetchpriority="high"
-              width="600"
-              height="450"
-            />
+  src={heroImage} 
+  alt="Ambiente residencial aconchegante exibindo uma cama moderna e decorada"
+  loading="eager"
+  fetchPriority="high"
+  width="600"
+  height="450"
+/> 
           </div>
         </section>
 

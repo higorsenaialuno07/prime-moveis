@@ -136,9 +136,9 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: 35px;
-  align-items: stretch;
+  justify-content: center;
 }
 
 .product-card {
@@ -211,9 +211,10 @@
 }
 
 .current-price {
+  font-size: 1.7rem;
   font-weight: 800;
-  font-size: 1.4rem;
-  color: var(--primary);
+  color: var(--accent);
+  letter-spacing: -0.5px;
 }
 
 .product-btn {

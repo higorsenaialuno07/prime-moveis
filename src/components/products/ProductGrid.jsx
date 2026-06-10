@@ -8,7 +8,7 @@ function ProductGrid() {
       description: 'Design sofisticado',
       price: '2.499',
       image:
-        'https://images.unsplash.com/photo-1555041469-a586c61ea9bc',
+        '../assets/images/sofa-luxury.webp',
     },
 
     {
@@ -17,7 +17,7 @@ function ProductGrid() {
       description: 'Mesa premium moderna',
       price: '1.899',
       image:
-        'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e',
+        '../assets/images/table.webp',
     },
 
     {
@@ -26,7 +26,7 @@ function ProductGrid() {
       description: 'Conforto e elegância',
       price: '799',
       image:
-        'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85',
+        '../assets/images/cadeira-premium.webp',
     },
   ]
 
