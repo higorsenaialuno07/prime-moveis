@@ -104,6 +104,8 @@ function Home() {
             <div className="category-card"><h3>Mesas</h3></div>
             <div className="category-card"><h3>Cadeiras</h3></div>
             <div className="category-card"><h3>Armários</h3></div>
+            <div className="category-card"><h3>Decoração</h3></div>
+            <div className="category-card"><h3>Iluminação</h3></div>
           </div>
         </section>
 

@@ -18,7 +18,7 @@
 }
 
 .hero-content {
-  animation: fadeIn 0.8s ease;
+  animation: fadeIn 0.8s ease forwards;
 }
 
 .hero-badge {
@@ -37,6 +37,7 @@
   line-height: 1.1;
   color: var(--primary);
   margin-bottom: 25px;
+  font-weight: 800;
 }
 
 .hero-content p {
@@ -67,7 +68,7 @@
 }
 
 /* ==========================================================================
-   CATEGORIES (Otimizado de auto-fit para auto-fill + Centralização)
+   CATEGORIES
    ========================================================================== */
 
 .categories {
@@ -91,7 +92,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
-  justify-content: center; /* Centraliza itens restantes */
+  justify-content: center;
 }
 
 .category-card {
@@ -117,6 +118,7 @@
   font-size: 1.5rem;
   margin-bottom: 15px;
   color: var(--primary);
+  font-weight: 700;
 }
 
 .category-card p {
@@ -125,7 +127,7 @@
 }
 
 /* ==========================================================================
-   PRODUCTS (Otimizado contra distorções visuais)
+   PRODUCTS
    ========================================================================== */
 
 .featured-products {
@@ -134,9 +136,9 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-  gap: 30px;
-  justify-content: center; /* Impede desalinhamento se houver poucos itens */
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 35px;
+  justify-content: center;
 }
 
 .product-card {
@@ -145,7 +147,7 @@
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 360px; /* Impede o card de virar um banner horizontal gigante */
+  max-width: 360px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -161,9 +163,11 @@
   width: 100%;
   overflow: hidden;
   position: relative;
+  background: #f1f5f9;
 }
 
-.product-image img {
+/* Sincronizado perfeitamente com a classe aplicada no seu JSX */
+.product-image img.product-card-img {
   width: 100%;
   max-width: 100%;
   height: 260px;
@@ -171,6 +175,11 @@
   object-fit: cover;
   object-position: center;
   image-rendering: -webkit-optimize-contrast;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover img.product-card-img {
+  transform: scale(1.06);
 }
 
 .product-content {
@@ -184,6 +193,7 @@
   font-size: 1.4rem;
   margin-bottom: 12px;
   color: var(--primary);
+  font-weight: 700;
 }
 
 .product-description {
@@ -214,7 +224,7 @@
   border-radius: 14px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .product-btn:hover {
@@ -286,6 +296,7 @@
   margin-bottom: 15px;
   font-size: 1.4rem;
   color: var(--primary);
+  font-weight: 700;
 }
 
 .benefit-card p {
@@ -358,8 +369,19 @@ body.dark .secondary-btn {
 }
 
 /* ==========================================================================
-   RESPONSIVE
+   RESPONSIVE & ANIMATIONS
    ========================================================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @media (max-width: 900px) {
   .hero {
