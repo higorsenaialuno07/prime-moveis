@@ -136,9 +136,9 @@
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 35px;
-  justify-content: center;
+  align-items: stretch;
 }
 
 .product-card {
@@ -146,12 +146,11 @@
   border-radius: 25px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 360px;
+  transition: all 0.3s ease;
   width: 100%;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .product-card:hover {
@@ -184,9 +183,9 @@
 
 .product-content {
   padding: 24px;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .product-content h3 {
@@ -208,6 +207,7 @@
   justify-content: space-between;
   align-items: center;
   margin-top: auto;
+  gap: 15px;
 }
 
 .current-price {
