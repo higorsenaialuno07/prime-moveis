@@ -162,7 +162,7 @@
 
 /* CARD - Travado para não virar banner horizontal */
 .product-card {
-  background: #8d9bb9;
+  background: #525864;
   border-radius: 28px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -256,7 +256,7 @@
 }
 
 .current-price {
-  color: #38bdf8;
+  color: #ff0000;
   font-size: 1.8rem;
   font-weight: 800;
 }
