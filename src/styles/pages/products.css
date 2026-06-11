@@ -186,18 +186,31 @@
   height: 260px;
   width: 100%;
   overflow: hidden;
-  background: #0b1120;
   position: relative;
+  
+  /* CRUCIAL: Força o fundo do contêiner da imagem a ser transparente */
+  background: transparent !important; 
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Dá um espaço elegante para o produto não tocar nas bordas */
 }
 
 /* Forçado a imagem a respeitar a largura interna sem esticar na busca */
 .product-image img.product-card-img {
-  width: 100%;
   max-width: 100%;
-  height: 260px;
-  object-fit: cover;
-  object-position: center;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   display: block;
+  
+  /* Mantém a proporção real do móvel sem achatar */
+  object-fit: contain; 
+  
+  /* Remove qualquer efeito antigo de mesclagem que escurecia o PNG */
+  mix-blend-mode: normal !important; 
+  
   image-rendering: -webkit-optimize-contrast;
   transition: transform 0.4s ease;
 }
@@ -409,7 +422,13 @@ body.dark .product-card:hover {
 }
 
 body.dark .product-image {
-  background: #0b1120;
+  background: transparent !important;
+}
+
+body.dark .product-image img.product-card-img {
+  /* Opcional: Adiciona um leve brilho/sombra suave atrás do móvel escuro 
+     para ele destacar melhor contra o fundo azul-escuro do card */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
 }
 
 body.dark .product-content h3 {

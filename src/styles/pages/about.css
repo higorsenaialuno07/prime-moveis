@@ -388,3 +388,61 @@
   }
 
 }
+
+/* =========================
+   DARK MODE
+========================= */
+
+.about-page.dark{
+  background:
+    linear-gradient(
+      to bottom,
+      #020617 0%,
+      #0f172a 100%
+    );
+}
+
+.about-page.dark .about-section,
+.about-page.dark .mission-section,
+.about-page.dark .team-section{
+  background:transparent;
+}
+
+.about-page.dark .about-content h2,
+.about-page.dark .mission-card h2,
+.about-page.dark .section-title h2,
+.about-page.dark .team-card h3{
+  color:#f8fafc;
+}
+
+.about-page.dark .about-content p,
+.about-page.dark .mission-card p,
+.about-page.dark .team-card span,
+.about-page.dark .stat-box span{
+  color:#94a3b8;
+}
+
+.about-page.dark .stat-box,
+.about-page.dark .mission-card,
+.about-page.dark .team-card{
+  background:#1e293b;
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:none;
+}
+
+.about-page.dark .stat-box h3{
+  color:var(--accent);
+}
+
+.about-page.dark .about-image img{
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35);
+}
+
+.about-page.dark .mission-card:hover,
+.about-page.dark .team-card:hover{
+  box-shadow:
+    0 15px 40px rgba(0,0,0,.35);
+}

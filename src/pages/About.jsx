@@ -3,9 +3,13 @@ import Footer from '../components/layout/Footer'
 
 import empresaImage from '../assets/images/empresa.png'
 
+import { useThemeContext } from '../context/ThemeContext'
+
 function About() {
+  const { theme } = useThemeContext()
+
   return (
-    <div className="about-page">
+    <div className={`about-page ${theme}`}>
       <Navbar />
 
       <section className="about-hero">
@@ -27,10 +31,12 @@ function About() {
       </section>
 
       <section className="about-section">
-       <img
-  src={empresaImage}
-  alt="Empresa"
-/>
+        <div className="about-image">
+          <img
+            src={empresaImage}
+            alt="Empresa Prime Móveis"
+          />
+        </div>
 
         <div className="about-content">
           <h2>Nossa História</h2>
@@ -105,7 +111,7 @@ function About() {
           <div className="team-card">
             <img
               src="https://i.pravatar.cc/200?img=11"
-              alt=""
+              alt="Lucas Martins"
             />
 
             <h3>Lucas Martins</h3>
@@ -116,7 +122,7 @@ function About() {
           <div className="team-card">
             <img
               src="https://i.pravatar.cc/200?img=12"
-              alt=""
+              alt="Gabriel Santos"
             />
 
             <h3>Gabriel Santos</h3>
@@ -127,7 +133,7 @@ function About() {
           <div className="team-card">
             <img
               src="https://i.pravatar.cc/200?img=13"
-              alt=""
+              alt="Marcos Silva"
             />
 
             <h3>Marcos Silva</h3>
@@ -142,4 +148,4 @@ function About() {
   )
 }
 
-export default About
+export default About  

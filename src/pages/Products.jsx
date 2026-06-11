@@ -11,6 +11,7 @@ import chairImage from '../assets/images/cadeira-premium.png'
 import poltronaImage from '../assets/images/poltrona-classic.webp'
 import rackImage from '../assets/images/rack.webp'
 import officeImage from '../assets/images/mesa-office.webp'
+import heroImage from '../assets/images/Cama.webp'
 
 function Products() {
   const [search, setSearch] = useState('')
@@ -60,12 +61,12 @@ function Products() {
         {/* HERO - Atualizado para w=800 batendo 100% com o seu index.html */}
         <section className="products-hero">
           <img 
-            src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=35&w=800&auto=format&fit=crop&fm=webp" 
-            alt="Ambiente residencial decorado com móveis premium da Prime Móveis" 
-            className="hero-bg-image"
-            fetchpriority="high"
-            loading="eager"
-          />
+  src={heroImage} 
+  alt="Ambiente residencial decorado com móveis premium da Prime Móveis" 
+  className="hero-bg-image"
+  fetchPriority="high"
+  loading="eager"
+/>
           <div className="hero-overlay"></div>
 
           <div className="products-hero-content">
