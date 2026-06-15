@@ -21,6 +21,42 @@ function Categories() {
         <div className="category-card">
           <h3>Armários</h3>
         </div>
+
+      <div className="category-card">
+          <h3>Racks</h3>
+        </div>
+
+      <div className="category-card">
+          <h3>Poltronas</h3>
+        </div>
+      
+      <div className="category-card">
+          <h3>Mesas de Centro</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Estofados</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Escrivaninhas</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Prateleiras</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Guarda-Roupas</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Estantes</h3>
+        </div>
+
+        <div className="category-card">
+          <h3>Camas</h3>
+        </div>
       </div>
     </section>
   )
