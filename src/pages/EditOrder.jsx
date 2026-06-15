@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 
@@ -17,8 +18,9 @@ function EditOrder() {
   const [status, setStatus] = useState('Pendente')
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/immutability
     loadOrder()
-  }, [])
+  }, [loadOrder])
 
   async function loadOrder() {
 

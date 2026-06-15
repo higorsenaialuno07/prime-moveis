@@ -132,7 +132,7 @@
 }
 
 .info-card:hover{
-  transform:translateY(-6px);
+  transform:translateY(-5px);
 }
 
 .info-card h2{
@@ -512,30 +512,11 @@ body.dark .catalog-btn-primary:hover{
   background:#0ea5e9;
 }
 
-.theme-toggle{
-  border:none;
-  cursor:pointer;
-
-  width:45px;
-  height:45px;
-
-  border-radius:50%;
-
-  background:#f1f5f9;
-
-  font-size:1.1rem;
-
-  transition:.3s;
-}
 
 .theme-toggle:hover{
   transform:scale(1.08);
 }
 
-body.dark .theme-toggle{
-  background:#1e293b;
-  color:white;
-}
 
 .theme-toggle{
   position:absolute;
@@ -568,4 +549,78 @@ body.dark .theme-toggle{
 
 .catalog-overlay{
   position:relative;
+}
+
+/* HERO */
+
+body.dark .catalog-overlay h1{
+  color:#f8fafc;
+}
+
+body.dark .catalog-overlay p{
+  color:#cbd5e1;
+}
+
+body.dark .catalog-badge{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.1);
+  color:#f8fafc;
+}
+
+/* BOTÕES HERO */
+
+body.dark .catalog-btn-secondary{
+  border:2px solid #38bdf8;
+  color:#38bdf8;
+}
+
+body.dark .catalog-btn-secondary:hover{
+  background:#38bdf8;
+  color:white;
+}
+
+/* INFO SECTION */
+
+body.dark .catalog-info{
+  color:#f8fafc;
+}
+
+/* FOOTER DOS CARDS */
+
+body.dark .catalog-footer{
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:15px;
+}
+
+/* HOVER DOS CARDS */
+
+body.dark .catalog-card:hover{
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.55);
+}
+
+/* CTA */
+
+body.dark .cta-btn{
+  box-shadow:
+    0 10px 30px rgba(56,189,248,.25);
+}
+
+/* SCROLLBAR */
+
+body.dark::-webkit-scrollbar{
+  width:10px;
+}
+
+body.dark::-webkit-scrollbar-track{
+  background:#020617;
+}
+
+body.dark::-webkit-scrollbar-thumb{
+  background:#1e293b;
+  border-radius:999px;
+}
+
+body.dark::-webkit-scrollbar-thumb:hover{
+  background:#334155;
 }
