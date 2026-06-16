@@ -145,7 +145,12 @@ function Products() {
 
                   <div className="product-footer">
                     <div className="product-price">
-                      <span className="current-price">R$ {product.price.toFixed(2)}</span>
+                      <span className="current-price">
+  {product.price.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })}
+</span>
                     </div>
                     <button
                       className="product-btn"
